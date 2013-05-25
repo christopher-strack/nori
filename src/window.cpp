@@ -19,7 +19,9 @@ std::string _create_unique_class_name() {
 
 namespace nori {
 
-window::window() {
+window::window()
+    : _closed(false)
+{
     if (!_create()) {
         throw std::runtime_error("Couldn't create window");
     }
@@ -44,6 +46,15 @@ void window::set_visible(bool visible) {
 
 bool window::visible() const {
     return ::IsWindowVisible(_handle) == TRUE;
+}
+
+void window::close() {
+    _closed = true;
+    ::DestroyWindow(_handle);
+}
+
+bool window::closed() const {
+    return _closed;
 }
 
 bool window::_create() {
@@ -84,6 +95,11 @@ bool window::_create() {
 }
 
 void window::_handle_message(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) {
+    switch(message) {
+    case WM_CLOSE:
+        _closed = true;
+        break;
+    }
 }
 
 LRESULT CALLBACK window::_window_proc(
