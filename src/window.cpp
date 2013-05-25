@@ -59,11 +59,8 @@ bool window::closed() const {
 
 bool window::_create() {
     _class_name = _create_unique_class_name();
-
     HINSTANCE hinstance = ::GetModuleHandle(0);
-
     WNDCLASSEX window_class;
-
     window_class.cbSize        = sizeof(WNDCLASSEX);
     window_class.style         = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
     window_class.lpfnWndProc   = &_window_proc;
