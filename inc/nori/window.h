@@ -13,6 +13,9 @@ public:
     window();
     ~window();
 
+    void set_visible(bool visible);
+    bool visible() const;
+
     static const unsigned int DEFAULT_WIDTH = 800;
     static const unsigned int DEFAULT_HEIGHT = 600;
 

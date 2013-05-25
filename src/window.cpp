@@ -27,9 +27,23 @@ window::window() {
 
 window::~window() {
     HINSTANCE hinstance = ::GetModuleHandle(0);
-
     ::DestroyWindow(_handle);
     ::UnregisterClass(_class_name.c_str(), hinstance);
+}
+
+void window::set_visible(bool visible) {
+    if (visible) {
+        ::UpdateWindow(_handle);
+        ::ShowWindow(_handle, SW_SHOWNORMAL);
+    }
+    else {
+        ::UpdateWindow(_handle);
+        ::ShowWindow(_handle, SW_HIDE);
+    }
+}
+
+bool window::visible() const {
+    return ::IsWindowVisible(_handle) == TRUE;
 }
 
 bool window::_create() {
