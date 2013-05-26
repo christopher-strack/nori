@@ -28,6 +28,8 @@ window::window()
 }
 
 window::~window() {
+    _graphics_surface = 0;
+
     HINSTANCE hinstance = ::GetModuleHandle(0);
     ::DestroyWindow(_handle);
     ::UnregisterClass(_class_name.c_str(), hinstance);
