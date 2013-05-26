@@ -9,11 +9,18 @@ option(NORI_BUILD_SAMPLES "Build nori samples" ON)
 
 
 # nori library
-include_directories(inc)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
+
+find_package(OpenGl REQUIRED)
+set(GLEW_ROOT CACHE PATH "Path to GLEW")
+find_package(Glew REQUIRED)
+
+include_directories(inc ${GLEW_INCLUDE_DIRS})
 
 file(GLOB nori_sources src/*.cpp)
 file(GLOB nori_includes inc/nori/*.h)
 add_library(nori ${nori_sources} ${nori_includes})
+target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
 
 
 # nori tests

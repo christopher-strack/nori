@@ -26,13 +26,12 @@ public:
     void set_title(const std::string& title);
     std::string title() const;
 
+    HWND handle() const;
+
     void dispatch_messages();
 
 
     static const nori::size default_size;
-
-protected:
-    HWND handle() const;
 
 private:
     bool _create();
