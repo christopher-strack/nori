@@ -1,4 +1,7 @@
 #include "nori/window.h"
+#include "nori/graphics_surface.h"
+
+#include <boost/make_shared.hpp>
 #include <stdexcept>
 #include <sstream>
 
@@ -73,6 +76,14 @@ void window::set_title(const std::string& title) {
 
 std::string window::title() const {
     return _title;
+}
+
+graphics_surface_ptr window::graphics_surface() {
+    if (_graphics_surface == 0) {
+        _graphics_surface = boost::make_shared<nori::graphics_surface>(*this);
+    }
+
+    return _graphics_surface;
 }
 
 HWND window::handle() const {

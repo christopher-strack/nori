@@ -39,6 +39,13 @@ TEST(window, title) {
     ASSERT_EQ(window.title(), "test title");
 }
 
+TEST(window, graphics_surface) {
+    nori::window window;
+
+    nori::graphics_surface_ptr surface = window.graphics_surface();
+    ASSERT_TRUE(surface != 0);
+}
+
 
 class testable_window : public nori::window, public testing::Test {
 public:

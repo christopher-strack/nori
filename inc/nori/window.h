@@ -2,6 +2,7 @@
 #define NORI_WINDOW_H_
 
 #include "nori/vector2.h"
+#include "nori/detail/graphics_surface_fwd.h"
 #include "nori/detail/windows_fwd.h"
 
 #include <string>
@@ -26,6 +27,8 @@ public:
     void set_title(const std::string& title);
     std::string title() const;
 
+    graphics_surface_ptr graphics_surface();
+
     HWND handle() const;
 
     void dispatch_messages();
@@ -46,6 +49,8 @@ private:
     DWORD _style;
     std::string _class_name;
     std::string _title;
+
+    graphics_surface_ptr _graphics_surface;
 };
 
 } /* namespace nori */
