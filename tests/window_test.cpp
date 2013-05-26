@@ -7,26 +7,26 @@ TEST(window, construct) {
 }
 
 TEST(window, visible) {
-    nori::window win;
-    ASSERT_EQ(win.visible(), false);
+    nori::window window;
+    ASSERT_EQ(window.visible(), false);
 
-    win.set_visible(true);
-    ASSERT_EQ(win.visible(), true);
+    window.set_visible(true);
+    ASSERT_EQ(window.visible(), true);
 }
 
 TEST(window, close) {
-    nori::window win;
-    ASSERT_EQ(win.closed(), false);
+    nori::window window;
+    ASSERT_EQ(window.closed(), false);
 
-    win.close();
-    ASSERT_EQ(win.closed(), true);
+    window.close();
+    ASSERT_EQ(window.closed(), true);
 }
 
 TEST(window, size) {
-    nori::window win;
-    ASSERT_EQ(win.size(), nori::window::default_size);
+    nori::window window;
+    ASSERT_EQ(window.size(), nori::window::default_size);
 
     nori::size new_size(1024, 768);
-    win.set_size(new_size);
-    ASSERT_EQ(win.size(), new_size);
+    window.set_size(new_size);
+    ASSERT_EQ(window.size(), new_size);
 }
