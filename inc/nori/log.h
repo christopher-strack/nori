@@ -1,16 +1,14 @@
 #ifndef NORI_LOG_H_
 #define NORI_LOG_H_
 
+#include "nori/detail/log.h"
+
+
 namespace nori {
 
-enum log_priority {
-    LOG_INFO,
-    LOG_WARNING,
-    LOG_ERROR,
-    LOG_FATAL
-};
-
-void log(log_priority priority, const char* message, ...);
+void log(const char* message, ...);
+void log_warning(const char* message, ...);
+void log_error(const char* message, ...);
 
 } /* namespace nori */
 

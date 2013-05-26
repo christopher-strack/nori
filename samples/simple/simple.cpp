@@ -20,7 +20,7 @@ int nori_main() {
         app.run();
     }
     catch (const std::runtime_error& error) {
-        nori::log(nori::LOG_ERROR, error.what());
+        nori::log_error(error.what());
     }
 
     return 0;
