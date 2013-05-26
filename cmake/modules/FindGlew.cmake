@@ -18,16 +18,15 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-message(STATUS ${GLEW_ROOT})
 find_path(GLEW_INCLUDE_DIR GL/glew.h
     HINTS
-        ENV GLEW_ROOT/include
+        $ENV{GLEW_ROOT}/include
         ${GLEW_ROOT}/include)
 
 find_library(GLEW_LIBRARY
     NAMES GLEW glew32 glew glew32s
     HINTS
-        ENV GLEW_ROOT/lib
+        $ENV{GLEW_ROOT}/lib
         ${GLEW_ROOT}/lib
     PATH_SUFFIXES lib64)
 
