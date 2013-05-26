@@ -1,6 +1,7 @@
 #ifndef NORI_GRAPHICS_SURFACE_H_
 #define NORI_GRAPHICS_SURFACE_H_
 
+#include "nori/detail/graphics_surface_fwd.h"
 #include "nori/detail/windows_fwd.h"
 
 

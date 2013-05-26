@@ -14,8 +14,10 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
 find_package(OpenGl REQUIRED)
 set(GLEW_ROOT CACHE PATH "Path to GLEW")
 find_package(Glew REQUIRED)
+set(BOOST_ROOT CACHE PATH "Path to boost")
+find_package(Boost REQUIRED)
 
-include_directories(inc ${GLEW_INCLUDE_DIRS})
+include_directories(inc ${GLEW_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 file(GLOB nori_sources src/*.cpp)
 file(GLOB nori_includes inc/nori/*.h)
