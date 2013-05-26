@@ -22,7 +22,7 @@ public:
     bool closed() const;
 
     void set_size(const nori::size& size);
-    nori::size size() const;
+    size size() const;
 
     void set_title(const std::string& title);
     std::string title() const;

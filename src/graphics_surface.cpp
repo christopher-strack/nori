@@ -17,6 +17,19 @@ graphics_surface::~graphics_surface() {
     _release();
 }
 
+const size& graphics_surface::size() const {
+    return _size;
+}
+
+void graphics_surface::clear() {
+    ::glClearColor(0, 0, 0, 0);
+    ::glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void graphics_surface::swap() {
+    ::SwapBuffers(_device_context);
+}
+
 void graphics_surface::_initialize(const window& window) {
     _device_context = ::GetDC(_window_handle);
 
@@ -37,8 +50,8 @@ void graphics_surface::_initialize(const window& window) {
         throw std::runtime_error("Couldn't initialize glew");
     }
 
-    size client_size = window.size();
-    ::glViewport(0, 0, client_size.x, client_size.y);
+    _size = window.size();
+    ::glViewport(0, 0, _size.x, _size.y);
 }
 
 void graphics_surface::_release()

@@ -63,7 +63,7 @@ void window::set_size(const nori::size& size) {
     ::MoveWindow(_handle, rect.left, rect.top, size.x, size.y, FALSE);
 }
 
-nori::size window::size() const {
+size window::size() const {
     RECT rect;
     ::GetWindowRect(_handle, &rect);
     return nori::size(rect.right - rect.left, rect.bottom - rect.top);
