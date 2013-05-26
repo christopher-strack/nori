@@ -10,6 +10,9 @@ class application {
 public:
     void run();
 
+protected:
+    virtual void on_window_created(window& window) {}
+
 private:
     window _window;
 };
