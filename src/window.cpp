@@ -73,6 +73,18 @@ nori::size window::size() const {
     return nori::size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
+HWND window::handle() const {
+    return _handle;
+}
+
+void window::dispatch_messages() {
+    MSG msg;
+    while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+        ::TranslateMessage(&msg);
+        ::DispatchMessage(&msg);
+    }
+}
+
 bool window::_create() {
     _class_name = _create_unique_class_name();
     HINSTANCE hinstance = ::GetModuleHandle(0);

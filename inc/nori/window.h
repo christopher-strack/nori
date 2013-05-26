@@ -24,8 +24,13 @@ public:
     void set_size(const nori::size& size);
     nori::size size() const;
 
+    void dispatch_messages();
+
 
     static const nori::size default_size;
+
+protected:
+    HWND handle() const;
 
 private:
     bool _create();
