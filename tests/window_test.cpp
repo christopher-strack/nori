@@ -31,6 +31,14 @@ TEST(window, size) {
     ASSERT_EQ(window.size(), new_size);
 }
 
+TEST(window, title) {
+    nori::window window;
+    ASSERT_EQ(window.title(), "");
+
+    window.set_title("test title");
+    ASSERT_EQ(window.title(), "test title");
+}
+
 
 class testable_window : public nori::window, public testing::Test {
 public:

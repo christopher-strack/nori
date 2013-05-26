@@ -24,6 +24,9 @@ public:
     void set_size(const nori::size& size);
     nori::size size() const;
 
+    void set_title(const std::string& title);
+    std::string title() const;
+
     void dispatch_messages();
 
 
@@ -44,6 +47,7 @@ private:
     HWND _handle;
     DWORD _style;
     std::string _class_name;
+    std::string _title;
 };
 
 } /* namespace nori */

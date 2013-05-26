@@ -73,6 +73,15 @@ nori::size window::size() const {
     return nori::size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
+void window::set_title(const std::string& title) {
+    _title = title;
+    ::SetWindowTextA(_handle, title.c_str());
+}
+
+std::string window::title() const {
+    return _title;
+}
+
 HWND window::handle() const {
     return _handle;
 }
