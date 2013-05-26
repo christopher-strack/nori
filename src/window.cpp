@@ -5,14 +5,7 @@
 
 namespace {
 
-std::string _create_unique_class_name() {
-    static int window_counter = 0;
-    std::stringstream stream;
-    stream << "window_class_" << window_counter;
-    window_counter++;
-
-    return stream.str();
-}
+std::string _create_unique_class_name();
 
 } /* anonymous namespace */
 
@@ -148,3 +141,17 @@ LRESULT CALLBACK window::_window_proc(
 }
 
 } /* namespace nori */
+
+
+namespace {
+
+    std::string _create_unique_class_name() {
+        static int window_counter = 0;
+        std::stringstream stream;
+        stream << "window_class_" << window_counter;
+        window_counter++;
+
+        return stream.str();
+    }
+
+} /* anonymous namespace */
