@@ -15,9 +15,11 @@ void application::run() {
     while (!window.closed()) {
         window.dispatch_messages();
 
-        surface->clear();
-        draw();
-        surface->swap();
+        if (window.focused()) {
+            surface->clear();
+            draw();
+            surface->swap();
+        }
     }
 }
 
