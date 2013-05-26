@@ -1,6 +1,8 @@
 #ifndef NORI_WINDOW_H_
 #define NORI_WINDOW_H_
 
+#include "nori/vector2.h"
+
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <string>
@@ -19,9 +21,11 @@ public:
     void close();
     bool closed() const;
 
+    void set_size(const nori::size& size);
+    nori::size size() const;
 
-    static const unsigned int DEFAULT_WIDTH = 800;
-    static const unsigned int DEFAULT_HEIGHT = 600;
+
+    static const nori::size default_size;
 
 private:
     bool _create();

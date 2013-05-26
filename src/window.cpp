@@ -19,12 +19,16 @@ std::string _create_unique_class_name() {
 
 namespace nori {
 
+const nori::size window::default_size = nori::size(800, 600);
+
 window::window()
     : _closed(false)
 {
     if (!_create()) {
         throw std::runtime_error("Couldn't create window");
     }
+
+    set_size(default_size);
 }
 
 window::~window() {
@@ -57,6 +61,18 @@ bool window::closed() const {
     return _closed;
 }
 
+void window::set_size(const nori::size& size) {
+    RECT rect;
+    ::GetWindowRect(_handle, &rect);
+    ::MoveWindow(_handle, rect.left, rect.top, size.x, size.y, FALSE);
+}
+
+nori::size window::size() const {
+    RECT rect;
+    ::GetWindowRect(_handle, &rect);
+    return nori::size(rect.right - rect.left, rect.bottom - rect.top);
+}
+
 bool window::_create() {
     _class_name = _create_unique_class_name();
     HINSTANCE hinstance = ::GetModuleHandle(0);
@@ -81,7 +97,7 @@ bool window::_create() {
             0, _class_name.c_str(), "",
             WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT, CW_USEDEFAULT,
-            DEFAULT_WIDTH, DEFAULT_HEIGHT,
+            default_size.x, default_size.y,
             0, 0,
             hinstance, 0);
 

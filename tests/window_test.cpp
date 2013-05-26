@@ -21,3 +21,12 @@ TEST(window, close) {
     win.close();
     ASSERT_EQ(win.closed(), true);
 }
+
+TEST(window, size) {
+    nori::window win;
+    ASSERT_EQ(win.size(), nori::window::default_size);
+
+    nori::size new_size(1024, 768);
+    win.set_size(new_size);
+    ASSERT_EQ(win.size(), new_size);
+}

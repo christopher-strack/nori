@@ -28,3 +28,11 @@ TEST(vector2, copy_assign) {
     ASSERT_EQ(v2.x, v1.x);
     ASSERT_EQ(v2.y, v1.y);
 }
+
+TEST(vector2, compare) {
+    nori::vector2<int> v1(10, 15);
+    nori::vector2<int> v2(15, 10);
+    nori::vector2<int> v3(15, 10);
+    ASSERT_TRUE(v1 != v2);
+    ASSERT_TRUE(v2 == v3);
+}

@@ -13,6 +13,9 @@ public:
     vector2(const vector2<T>& other);
     vector2<T>& operator=(const vector2<T>& other);
 
+    bool operator==(const vector2<T>& other) const;
+    bool operator!=(const vector2<T>& other) const;
+
     T x;
     T y;
 };
@@ -39,6 +42,16 @@ vector2<T>& vector2<T>::operator=(const vector2<T>& other) {
     x = other.x;
     y = other.y;
     return *this;
+}
+
+template<typename T>
+bool nori::vector2<T>::operator==(const vector2<T>& other) const {
+    return x == other.x && y == other.y;
+}
+
+template<typename T>
+bool nori::vector2<T>::operator!=(const vector2<T>& other) const {
+    return !operator==(other);
 }
 
 } /* namespace nori */
