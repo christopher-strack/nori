@@ -1,5 +1,8 @@
 #include <nori/main.h>
 #include <nori/application.h>
+#include <nori/log.h>
+
+#include <stdexcept>
 
 
 class sample_app : public nori::application {
@@ -12,9 +15,13 @@ public:
 
 
 int nori_main() {
-    sample_app app;
-
-    app.run();
+    try {
+        sample_app app;
+        app.run();
+    }
+    catch (const std::runtime_error& error) {
+        nori::log(nori::LOG_ERROR, error.what());
+    }
 
     return 0;
 }
