@@ -18,7 +18,7 @@ namespace nori {
 const nori::size window::default_size = nori::size(800, 600);
 
 window::window()
-    : _closed(false)
+    : _closed(false), _focused(false)
 {
     if (!_create()) {
         throw std::runtime_error("Couldn't create window");
@@ -78,6 +78,10 @@ std::string window::title() const {
     return _title;
 }
 
+bool window::focused() const {
+    return visible() && _focused;
+}
+
 graphics_surface_ptr window::graphics_surface() {
     if (_graphics_surface == 0) {
         _graphics_surface = boost::make_shared<nori::graphics_surface>(*this);
@@ -134,6 +138,9 @@ bool window::_create() {
 
 void window::_handle_message(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) {
     switch(message) {
+    case WM_ACTIVATE:
+        _focused = !HIWORD(wparam);
+        break;
     case WM_CLOSE:
         _closed = true;
         break;

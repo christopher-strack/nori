@@ -27,6 +27,8 @@ public:
     void set_title(const std::string& title);
     std::string title() const;
 
+    bool focused() const;
+
     graphics_surface_ptr graphics_surface();
 
     HWND handle() const;
@@ -45,10 +47,11 @@ private:
         HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 
     bool _closed;
+    bool _focused;
+    std::string _title;
     HWND _handle;
     DWORD _style;
     std::string _class_name;
-    std::string _title;
 
     graphics_surface_ptr _graphics_surface;
 };

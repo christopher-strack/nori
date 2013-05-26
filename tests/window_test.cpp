@@ -39,6 +39,13 @@ TEST(window, title) {
     ASSERT_EQ(window.title(), "test title");
 }
 
+TEST(window, focus) {
+    nori::window window;
+
+    window.set_visible(true);
+    ASSERT_TRUE(window.focused());
+}
+
 TEST(window, graphics_surface) {
     nori::window window;
 
