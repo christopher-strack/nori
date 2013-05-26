@@ -1,10 +1,11 @@
 #ifndef NORI_APPLICATION_H_
 #define NORI_APPLICATION_H_
 
-#include "nori/window.h"
-
 
 namespace nori {
+
+class window;
+
 
 class application {
 public:
@@ -13,8 +14,7 @@ public:
 protected:
     virtual void on_window_created(window& window) {}
 
-private:
-    window _window;
+    virtual void draw() {}
 };
 
 } /* namespace nori */

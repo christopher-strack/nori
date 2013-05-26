@@ -1,15 +1,23 @@
 #include "nori/application.h"
+#include "nori/graphics_surface.h"
+#include "nori/window.h"
 
 
 namespace nori {
 
 void application::run() {
-    on_window_created(_window);
+    nori::window window;
+    on_window_created(window);
+    window.set_visible(true);
 
-    _window.set_visible(true);
+    graphics_surface_ptr surface = window.graphics_surface();
 
-    while (!_window.closed()) {
-        _window.dispatch_messages();
+    while (!window.closed()) {
+        window.dispatch_messages();
+
+        surface->clear();
+        draw();
+        surface->swap();
     }
 }
 

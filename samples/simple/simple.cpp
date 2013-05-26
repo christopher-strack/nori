@@ -1,5 +1,6 @@
 #include <nori/main.h>
 #include <nori/application.h>
+#include <nori/window.h>
 #include <nori/log.h>
 
 #include <stdexcept>
