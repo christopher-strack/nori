@@ -1,31 +1,19 @@
-#ifndef NORI_WINDOW_H_
-#define NORI_WINDOW_H_
+#ifndef NORI_ANDROID_WINDOW_H_
+#define NORI_ANDROID_WINDOW_H_
 
 #include "nori/vector2.h"
 #include "nori/detail/graphics_surface_fwd.h"
 
-#include <boost/shared_ptr.hpp>
 #include <string>
 
 
 namespace nori {
-
 namespace detail {
 
-#if defined(WIN32)
-class win_window;
-typedef win_window window_impl;
-#elif defined(ANDROID)
-class android_window;
-typedef android_window window_impl;
-#endif
-
-} /* namespace detail */
-
-
-class window {
+class android_window {
 public:
-    window();
+    android_window();
+    ~android_window();
 
     void set_visible(bool visible);
     bool visible() const;
@@ -44,11 +32,9 @@ public:
     graphics_surface_ptr graphics_surface();
 
     void dispatch_messages();
-
-private:
-    boost::shared_ptr<detail::window_impl> _impl;
 };
 
+} /* namespace detail */
 } /* namespace nori */
 
-#endif /* NORI_WINDOW_H_ */
+#endif /* NORI_ANDROID_WINDOW_H_ */

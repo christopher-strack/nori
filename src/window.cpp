@@ -4,6 +4,8 @@
 
 #if defined(WIN32)
 #include "nori/detail/win_window.h"
+#elif defined(ANDROID)
+#include "nori/detail/android_window.h"
 #endif
 
 
