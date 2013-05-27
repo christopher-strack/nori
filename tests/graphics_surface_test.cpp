@@ -3,33 +3,25 @@
 #include <nori/window.h>
 
 
-TEST(graphics_surface, construct) {
-    HWND hwnd = 0;
+class graphics_surface_fixture : public testing::Test {
+public:
+    graphics_surface_fixture() {
+        surface = window.graphics_surface();
+    }
+
+    nori::graphics_surface_ptr surface;
     nori::window window;
-    nori::graphics_surface surface(hwnd, window);
+};
+
+
+TEST_F(graphics_surface_fixture, size) {
+    ASSERT_EQ(surface->size(), window.size());
 }
 
-TEST(graphics_surface, size) {
-    HWND hwnd = 0;
-    nori::window window;
-    window.set_size(nori::size(500, 300));
-    nori::graphics_surface surface(hwnd, window);
-
-    ASSERT_EQ(surface.size(), window.size());
+TEST_F(graphics_surface_fixture, clear) {
+    surface->clear();
 }
 
-TEST(graphics_surface, clear) {
-    HWND hwnd = 0;
-    nori::window window;
-    nori::graphics_surface surface(hwnd, window);
-
-    surface.clear();
-}
-
-TEST(graphics_surface, swap) {
-    HWND hwnd = 0;
-    nori::window window;
-    nori::graphics_surface surface(hwnd, window);
-
-    surface.swap();
+TEST_F(graphics_surface_fixture, swap) {
+    surface->swap();
 }

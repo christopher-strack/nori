@@ -1,5 +1,5 @@
 #include "nori/detail/win_window.h"
-#include "nori/graphics_surface.h"
+#include "nori/detail/win_graphics_surface.h"
 
 #include <boost/make_shared.hpp>
 #include <stdexcept>
@@ -18,8 +18,8 @@ namespace detail {
 
 const nori::size win_window::default_size = nori::size(800, 600);
 
-win_window::win_window(window& window)
-    : _closed(false), _focused(false), _window(window)
+win_window::win_window()
+    : _closed(false), _focused(false)
 {
     if (!_create()) {
         throw std::runtime_error("Couldn't create window");
@@ -87,7 +87,7 @@ bool win_window::focused() const {
 
 graphics_surface_ptr win_window::graphics_surface() {
     if (_graphics_surface == 0) {
-        _graphics_surface = boost::make_shared<nori::graphics_surface>(_handle, _window);
+        _graphics_surface = boost::make_shared<win_graphics_surface>(*this);
     }
 
     return _graphics_surface;
@@ -154,7 +154,7 @@ LRESULT CALLBACK win_window::_window_proc(
     HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
     const LONG window_ptr = ::GetWindowLong(hwnd, GWL_USERDATA);
-    nori::detail::win_window* window = 
+    nori::detail::win_window* window =
         reinterpret_cast<nori::detail::win_window*>(window_ptr);
     if (window) {
         window->_handle_message(hwnd, message, wparam, lparam);

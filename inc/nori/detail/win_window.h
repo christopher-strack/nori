@@ -13,7 +13,7 @@ namespace detail {
 
 class win_window {
 public:
-    win_window(window& window);
+    win_window();
     ~win_window();
 
     void set_visible(bool visible);
@@ -54,7 +54,6 @@ private:
     DWORD _style;
     std::string _class_name;
 
-    window& _window;
     graphics_surface_ptr _graphics_surface;
 };
 

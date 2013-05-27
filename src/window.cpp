@@ -10,7 +10,7 @@
 namespace nori {
 
 window::window() {
-    _impl = boost::make_shared<detail::window_impl>(*this);
+    _impl = boost::make_shared<detail::window_impl>();
 }
 
 void window::set_visible(bool visible) {

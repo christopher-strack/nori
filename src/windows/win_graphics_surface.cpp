@@ -1,36 +1,37 @@
-#include "nori/graphics_surface.h"
-#include "nori/window.h"
+#include "nori/detail/win_graphics_surface.h"
+#include "nori/detail/win_window.h"
 #include "nori/detail/opengl_fwd.h"
 
 #include <stdexcept>
 
 
 namespace nori {
+namespace detail {
 
-graphics_surface::graphics_surface(HWND window_handle, const window& window)
-    : _window_handle(window_handle), _device_context(0), _opengl_context(0)
+win_graphics_surface::win_graphics_surface(const win_window& window)
+    : _window_handle(window.handle()), _device_context(0), _opengl_context(0)
 {
     _initialize(window);
 }
 
-graphics_surface::~graphics_surface() {
+win_graphics_surface::~win_graphics_surface() {
     _release();
 }
 
-const size& graphics_surface::size() const {
+const size& win_graphics_surface::size() const {
     return _size;
 }
 
-void graphics_surface::clear() {
+void win_graphics_surface::clear() {
     ::glClearColor(0, 0, 0, 0);
     ::glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void graphics_surface::swap() {
+void win_graphics_surface::swap() {
     ::SwapBuffers(_device_context);
 }
 
-void graphics_surface::_initialize(const window& window) {
+void win_graphics_surface::_initialize(const win_window& window) {
     _device_context = ::GetDC(_window_handle);
 
     if (_device_context == 0) {
@@ -54,7 +55,7 @@ void graphics_surface::_initialize(const window& window) {
     ::glViewport(0, 0, _size.x, _size.y);
 }
 
-void graphics_surface::_release()
+void win_graphics_surface::_release()
 {
     if (_opengl_context) {
         ::wglMakeCurrent(0, 0);
@@ -65,7 +66,7 @@ void graphics_surface::_release()
     ::ReleaseDC(_window_handle, _device_context);
 }
 
-void graphics_surface::_set_pixel_format(int bits) {
+void win_graphics_surface::_set_pixel_format(int bits) {
     PIXELFORMATDESCRIPTOR pixel_format_desc;
     pixel_format_desc.nSize = sizeof(PIXELFORMATDESCRIPTOR);
     pixel_format_desc.nVersion = 1;
@@ -100,4 +101,5 @@ void graphics_surface::_set_pixel_format(int bits) {
     }
 }
 
+} /* namespace detail */
 } /* namespace nori */

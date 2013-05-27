@@ -3,32 +3,16 @@
 
 #include "nori/vector2.h"
 #include "nori/detail/graphics_surface_fwd.h"
-#include "nori/detail/windows_fwd.h"
 
 
 namespace nori {
 
-class window;
-
 class graphics_surface {
 public:
-    graphics_surface(HWND window_handle, const window& window);
-    ~graphics_surface();
+    virtual const nori::size& size() const = 0;
 
-    const size& size() const;
-
-    void clear();
-    void swap();
-
-private:
-    void _initialize(const window& window);
-    void _release();
-    void _set_pixel_format(int bits);
-
-    HWND _window_handle;
-    HDC _device_context;
-    HGLRC _opengl_context;
-    nori::size _size;
+    virtual void clear() = 0;
+    virtual void swap() = 0;
 };
 
 } /* namespace nori */
