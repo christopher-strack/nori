@@ -3,17 +3,26 @@
 
 #include "nori/vector2.h"
 #include "nori/detail/graphics_surface_fwd.h"
-#include "nori/detail/windows_fwd.h"
 
+#include <boost/shared_ptr.hpp>
 #include <string>
 
 
 namespace nori {
 
+namespace detail {
+
+#if defined(WIN32)
+class win_window;
+typedef win_window window_impl;
+#endif
+
+} /* namespace detail */
+
+
 class window {
 public:
     window();
-    ~window();
 
     void set_visible(bool visible);
     bool visible() const;
@@ -22,7 +31,7 @@ public:
     bool closed() const;
 
     void set_size(const nori::size& size);
-    size size() const;
+    nori::size size() const;
 
     void set_title(const std::string& title);
     std::string title() const;
@@ -31,29 +40,10 @@ public:
 
     graphics_surface_ptr graphics_surface();
 
-    HWND handle() const;
-
     void dispatch_messages();
 
-
-    static const nori::size default_size;
-
 private:
-    bool _create();
-
-    void _handle_message(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-
-    static LRESULT CALLBACK _window_proc(
-        HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-
-    bool _closed;
-    bool _focused;
-    std::string _title;
-    HWND _handle;
-    DWORD _style;
-    std::string _class_name;
-
-    graphics_surface_ptr _graphics_surface;
+    boost::shared_ptr<detail::window_impl> _impl;
 };
 
 } /* namespace nori */

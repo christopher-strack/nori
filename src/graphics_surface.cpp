@@ -7,8 +7,8 @@
 
 namespace nori {
 
-graphics_surface::graphics_surface(const window& window)
-    : _window_handle(window.handle()), _device_context(0), _opengl_context(0)
+graphics_surface::graphics_surface(HWND window_handle, const window& window)
+    : _window_handle(window_handle), _device_context(0), _opengl_context(0)
 {
     _initialize(window);
 }

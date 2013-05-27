@@ -19,8 +19,8 @@ find_package(Boost REQUIRED)
 
 include_directories(inc ${GLEW_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
-file(GLOB nori_sources src/*.cpp)
-file(GLOB nori_includes inc/nori/*.h)
+file(GLOB nori_sources src/*.cpp src/windows/*.cpp)
+file(GLOB nori_includes inc/nori/*.h inc/nori/detail/*.h)
 add_library(nori ${nori_sources} ${nori_includes})
 target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
 

@@ -12,7 +12,7 @@ class window;
 
 class graphics_surface {
 public:
-    graphics_surface(const window& window);
+    graphics_surface(HWND window_handle, const window& window);
     ~graphics_surface();
 
     const size& size() const;
