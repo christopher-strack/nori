@@ -2,12 +2,12 @@
 #include <nori/log.h>
 
 
-TEST(log, log_all_priorities) {
-    nori::log("info");
+TEST(log_info, log_all_priorities) {
+    nori::log_info("info");
     nori::log_warning("warning");
     nori::log_error("error");
 }
 
-TEST(log, log_with_arguments) {
-    nori::log("info %s", "argument");
+TEST(log_info, log_with_arguments) {
+    nori::log_info("info %s", "argument");
 }
