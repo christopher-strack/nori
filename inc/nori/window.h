@@ -7,47 +7,20 @@
 #include <boost/shared_ptr.hpp>
 #include <string>
 
+#if defined(WIN32)
+#include "nori/detail/win_window.h"
+#elif defined(ANDROID)
+#include "nori/detail/null_window.h"
+#endif
+
 
 namespace nori {
 
-namespace detail {
-
 #if defined(WIN32)
-class win_window;
-typedef win_window window_impl;
+typedef detail::win_window window;
 #elif defined(ANDROID)
-class android_window;
-typedef android_window window_impl;
+typedef detail::null_window window;
 #endif
-
-} /* namespace detail */
-
-
-class window {
-public:
-    window();
-
-    void set_visible(bool visible);
-    bool visible() const;
-
-    void close();
-    bool closed() const;
-
-    void set_size(const nori::size& size);
-    nori::size size() const;
-
-    void set_title(const std::string& title);
-    std::string title() const;
-
-    bool focused() const;
-
-    graphics_surface_ptr graphics_surface();
-
-    void dispatch_messages();
-
-private:
-    boost::shared_ptr<detail::window_impl> _impl;
-};
 
 } /* namespace nori */
 

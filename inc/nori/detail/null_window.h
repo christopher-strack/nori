@@ -1,5 +1,5 @@
-#ifndef NORI_ANDROID_WINDOW_H_
-#define NORI_ANDROID_WINDOW_H_
+#ifndef NORI_NULL_WINDOW_H_
+#define NORI_NULL_WINDOW_H_
 
 #include "nori/vector2.h"
 #include "nori/detail/graphics_surface_fwd.h"
@@ -10,10 +10,9 @@
 namespace nori {
 namespace detail {
 
-class android_window {
+class null_window {
 public:
-    android_window();
-    ~android_window();
+    null_window();
 
     void set_visible(bool visible);
     bool visible() const;
@@ -37,4 +36,4 @@ public:
 } /* namespace detail */
 } /* namespace nori */
 
-#endif /* NORI_ANDROID_WINDOW_H_ */
+#endif /* NORI_NULL_WINDOW_H_ */

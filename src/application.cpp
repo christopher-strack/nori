@@ -1,6 +1,5 @@
 #include "nori/application.h"
 #include "nori/graphics_surface.h"
-#include "nori/window.h"
 
 
 namespace nori {

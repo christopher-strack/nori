@@ -1,11 +1,10 @@
 #ifndef NORI_APPLICATION_H_
 #define NORI_APPLICATION_H_
 
+#include "nori/window.h"
+
 
 namespace nori {
-
-class window;
-
 
 class application {
 public:
