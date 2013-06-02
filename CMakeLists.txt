@@ -58,5 +58,5 @@ endif()
 
 # nori samples
 if (NORI_BUILD_SAMPLES)
-    add_subdirectory(samples)
+    add_subdirectory(samples/simple)
 endif()
