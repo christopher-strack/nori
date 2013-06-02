@@ -1,10 +1,11 @@
-#include "nori/application.h"
+#include "nori/detail/win_application.h"
 #include "nori/graphics_surface.h"
 
 
 namespace nori {
+namespace detail {
 
-void application::run() {
+void win_application::run() {
     nori::window window;
     on_window_created(window);
     window.set_visible(true);
@@ -22,4 +23,5 @@ void application::run() {
     }
 }
 
+} /* namespace detail */
 } /* namespace nori */

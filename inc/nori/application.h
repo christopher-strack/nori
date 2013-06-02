@@ -1,20 +1,20 @@
 #ifndef NORI_APPLICATION_H_
 #define NORI_APPLICATION_H_
 
-#include "nori/window.h"
+#if defined(WIN32)
+#include "nori/detail/win_application.h"
+#elif defined(ANDROID)
+#include "nori/detail/android_application.h"
+#endif
 
 
 namespace nori {
 
-class application {
-public:
-    void run();
-
-protected:
-    virtual void on_window_created(window& window) {}
-
-    virtual void draw() {}
-};
+#if defined(WIN32)
+typedef detail::win_application application;
+#elif defined(ANDROID)
+typedef detail::android_application application;
+#endif
 
 } /* namespace nori */
 
