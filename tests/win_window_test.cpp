@@ -1,8 +1,8 @@
+#if defined(WIN32)
+
 #include <nori/window.h>
 #include <gtest/gtest.h>
 
-
-#if defined(WIN32)
 
 TEST(window, construct) {
     nori::window();

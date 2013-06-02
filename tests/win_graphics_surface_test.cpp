@@ -1,3 +1,5 @@
+#if defined(WIN32)
+
 #include <gtest/gtest.h>
 #include <nori/graphics_surface.h>
 #include <nori/window.h>
@@ -25,3 +27,5 @@ TEST_F(graphics_surface_fixture, clear) {
 TEST_F(graphics_surface_fixture, swap) {
     surface->swap();
 }
+
+#endif

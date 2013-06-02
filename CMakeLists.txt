@@ -23,7 +23,7 @@ elseif (ANDROID)
     add_library(native_app_glue STATIC ${native_app_glue_sources})
     target_link_libraries(native_app_glue android)
 
-    set(Android_LIBRARIES native_app_glue android log)
+    set(Android_LIBRARIES native_app_glue android log EGL GLESv2)
     set(Android_INCLUDE_DIRS "${ANDROID_NDK}/sources/android/native_app_glue")
 endif()
 
