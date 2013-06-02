@@ -39,13 +39,13 @@ set(BOOST_ROOT CACHE PATH "Path to boost")
 find_package(Boost REQUIRED)
 
 include_directories(
-    inc
+    include
     ${GLEW_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${Android_INCLUDE_DIRS})
 
 file(GLOB nori_sources src/*.cpp src/${nori_platform_folder}/*.cpp)
-file(GLOB nori_includes inc/nori/*.h inc/nori/detail/*.h)
+file(GLOB nori_includes include/nori/*.h include/nori/detail/*.h)
 add_library(nori ${nori_sources} ${nori_includes})
 target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${Android_LIBRARIES})
 
