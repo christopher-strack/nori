@@ -4,7 +4,7 @@
 namespace nori {
 namespace detail {
 
-void android_application::run() {
+void android_application::run(const nori::application_arguments& arguments) {
 }
 
 } /* namespace detail */

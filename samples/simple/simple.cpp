@@ -15,10 +15,10 @@ public:
 };
 
 
-int nori_main() {
+int nori_main(const nori::application_arguments& arguments) {
     try {
         sample_app app;
-        app.run();
+        app.run(arguments);
     }
     catch (const std::runtime_error& error) {
         nori::log_error(error.what());

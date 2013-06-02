@@ -5,7 +5,7 @@
 namespace nori {
 namespace detail {
 
-void win_application::run() {
+void win_application::run(const nori::application_arguments& arguments) {
     nori::window window;
     on_window_created(window);
     window.set_visible(true);

@@ -11,8 +11,20 @@ option(NORI_BUILD_SAMPLES "Build nori samples" ON)
 # nori library
 if (WIN32)
     set(nori_platform_folder "windows")
-elseif(ANDROID)
+elseif (ANDROID)
+    set(ANDROID_NATIVE_API_LEVEL 14)
     set(nori_platform_folder "android")
+
+    include_directories("${ANDROID_NDK}/platforms/android-${ANDROID_NATIVE_API_LEVEL}/arch-${ANDROID_ARCH_NAME}/usr/include")
+    link_directories("${ANDROID_NDK}/platforms/android-${ANDROID_NATIVE_API_LEVEL}/arch-${ANDROID_ARCH_NAME}/usr/lib")
+
+    set(native_app_glue_sources
+        "${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c")
+    add_library(native_app_glue STATIC ${native_app_glue_sources})
+    target_link_libraries(native_app_glue android)
+
+    set(Android_LIBRARIES native_app_glue android log)
+    set(Android_INCLUDE_DIRS "${ANDROID_NDK}/sources/android/native_app_glue")
 endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
@@ -26,12 +38,16 @@ endif()
 set(BOOST_ROOT CACHE PATH "Path to boost")
 find_package(Boost REQUIRED)
 
-include_directories(inc ${GLEW_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(
+    inc
+    ${GLEW_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
+    ${Android_INCLUDE_DIRS})
 
 file(GLOB nori_sources src/*.cpp src/${nori_platform_folder}/*.cpp)
 file(GLOB nori_includes inc/nori/*.h inc/nori/detail/*.h)
 add_library(nori ${nori_sources} ${nori_includes})
-target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
+target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${Android_LIBRARIES})
 
 
 # nori tests
