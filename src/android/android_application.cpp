@@ -1,5 +1,6 @@
 #include "nori/detail/android_application.h"
 #include "nori/detail/android_graphics_surface.h"
+#include "nori/detail/android_file.h"
 
 #include <android_native_app_glue.h>
 #include <android/native_activity.h>
@@ -20,6 +21,8 @@ void android_application::run(const nori::application_arguments& arguments) {
     arguments->userData = this;
     arguments->onAppCmd = &_on_android_command_proxy;
     arguments->onInputEvent = &_on_android_input_proxy;
+
+    detail::android_file::asset_manager = arguments->activity->assetManager;
 
     while (arguments->destroyRequested == 0) {
         _process_android_events(arguments);
