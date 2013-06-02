@@ -9,6 +9,7 @@
 namespace nori {
 namespace detail {
 
+void log_raw(const char* message, ...);
 void log(log_priority priority, const char* message, va_list args);
 
 } /* namespace detail */

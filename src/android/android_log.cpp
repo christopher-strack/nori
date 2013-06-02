@@ -15,6 +15,17 @@ android_LogPriority convert_to_android_priority(nori::detail::log_priority prior
 namespace nori {
 namespace detail {
 
+void log_raw(const char* message, ...) {
+    va_list args;
+    va_start(args, message);
+
+    char buffer[1024];
+    vsnprintf(buffer, 1024, message, args);
+    __android_log_print(ANDROID_LOG_INFO, "nori", buffer);
+
+    va_end(args);
+}
+
 void log(log_priority priority, const char* message, va_list args) {
     char buffer[1024];
     vsnprintf(buffer, 1024, message, args);
