@@ -15,6 +15,8 @@ namespace detail {
 
 class android_application {
 public:
+    android_application();
+
     void run(const nori::application_arguments& arguments);
 
 protected:
@@ -30,6 +32,7 @@ private:
     static void _on_android_command_proxy(android_app* app, int32_t cmd);
     static int32_t _on_android_input_proxy(android_app* app, AInputEvent* event);
 
+    bool _focused;
     graphics_surface_ptr _graphics_surface;
 };
 

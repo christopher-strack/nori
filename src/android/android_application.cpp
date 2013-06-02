@@ -11,6 +11,11 @@
 namespace nori {
 namespace detail {
 
+android_application::android_application()
+    : _focused(false)
+{
+}
+
 void android_application::run(const nori::application_arguments& arguments) {
     arguments->userData = this;
     arguments->onAppCmd = &_on_android_command_proxy;
@@ -19,7 +24,7 @@ void android_application::run(const nori::application_arguments& arguments) {
     while (arguments->destroyRequested == 0) {
         _process_android_events(arguments);
 
-        if (_graphics_surface) {
+        if (_graphics_surface && _focused) {
             _graphics_surface->clear();
             draw();
             _graphics_surface->swap();
@@ -46,6 +51,11 @@ void android_application::_on_android_command(android_app* app, int32_t cmd) {
         break;
     case APP_CMD_TERM_WINDOW:
         _graphics_surface.reset();
+        break;
+
+    case APP_CMD_GAINED_FOCUS:
+    case APP_CMD_LOST_FOCUS:
+        _focused = cmd == APP_CMD_GAINED_FOCUS;
         break;
     }
 }
