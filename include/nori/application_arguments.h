@@ -8,7 +8,11 @@ struct android_app;
 
 namespace nori {
 
-typedef ::android_app* application_arguments;
+struct application_arguments {
+    int argc;
+    char** argv;
+    ::android_app* android_app;
+};
 
 }
 

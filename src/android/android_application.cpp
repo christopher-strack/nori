@@ -18,14 +18,15 @@ android_application::android_application()
 }
 
 void android_application::run(const nori::application_arguments& arguments) {
-    arguments->userData = this;
-    arguments->onAppCmd = &_on_android_command_proxy;
-    arguments->onInputEvent = &_on_android_input_proxy;
+    android_app* app = arguments.android_app;
+    app->userData = this;
+    app->onAppCmd = &_on_android_command_proxy;
+    app->onInputEvent = &_on_android_input_proxy;
 
-    detail::android_file::asset_manager = arguments->activity->assetManager;
+    detail::android_file::asset_manager = app->activity->assetManager;
 
-    while (arguments->destroyRequested == 0) {
-        _process_android_events(arguments);
+    while (app->destroyRequested == 0) {
+        _process_android_events(app);
 
         if (_graphics_surface && _focused) {
             _graphics_surface->clear();
