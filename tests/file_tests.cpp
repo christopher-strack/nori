@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 
 TEST(file, construct) {
@@ -22,6 +23,13 @@ TEST(file, open) {
 
     file.open("assets/file.txt");
     ASSERT_TRUE(file.is_open());
+}
+
+TEST(file, open_invalid) {
+    nori::file file;
+
+    file.open("assets/invalid_file_location.txt");
+    ASSERT_FALSE(file.is_open());
 }
 
 TEST(file, close) {
@@ -69,3 +77,14 @@ TEST(file, read_too_much) {
 
     ASSERT_EQ(bytes_read, file_size);
 }
+
+
+#if defined(ANDROID)
+
+TEST(android_file, open_none_asset_location) {
+    nori::file file;
+
+    ASSERT_THROW(file.open("file.txt"), std::runtime_error);
+}
+
+#endif
