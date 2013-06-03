@@ -18,8 +18,10 @@ public:
     android_application();
 
     void run(const nori::application_arguments& arguments);
+    void shutdown();
 
 protected:
+    virtual void on_initialized() {}
     virtual void on_window_created(window& window) {}
 
     virtual void draw() {}
@@ -34,6 +36,7 @@ private:
 
     bool _focused;
     graphics_surface_ptr _graphics_surface;
+    android_app* _android_app;
 };
 
 } /* namespace detail */

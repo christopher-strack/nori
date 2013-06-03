@@ -19,17 +19,13 @@ void log_raw(const char* message, ...) {
     va_list args;
     va_start(args, message);
 
-    char buffer[1024];
-    vsnprintf(buffer, 1024, message, args);
-    __android_log_print(ANDROID_LOG_INFO, "nori", buffer);
+    __android_log_vprint(ANDROID_LOG_INFO, "nori", message, args);
 
     va_end(args);
 }
 
 void log(log_priority priority, const char* message, va_list args) {
-    char buffer[1024];
-    vsnprintf(buffer, 1024, message, args);
-    __android_log_print(convert_to_android_priority(priority), "nori", buffer);
+    __android_log_vprint(convert_to_android_priority(priority), "nori", message, args);
 }
 
 } /* namespace detail */

@@ -13,20 +13,23 @@ namespace nori {
 namespace detail {
 
 android_application::android_application()
-    : _focused(false)
+    : _focused(false), _android_app(0)
 {
 }
 
 void android_application::run(const nori::application_arguments& arguments) {
-    android_app* app = arguments.android_app;
-    app->userData = this;
-    app->onAppCmd = &_on_android_command_proxy;
-    app->onInputEvent = &_on_android_input_proxy;
+    _android_app = arguments.android_app;
 
-    detail::android_file::asset_manager = app->activity->assetManager;
+    _android_app->userData = this;
+    _android_app->onAppCmd = &_on_android_command_proxy;
+    _android_app->onInputEvent = &_on_android_input_proxy;
 
-    while (app->destroyRequested == 0) {
-        _process_android_events(app);
+    detail::android_file::asset_manager = _android_app->activity->assetManager;
+
+    on_initialized();
+
+    while (_android_app->destroyRequested == 0) {
+        _process_android_events(_android_app);
 
         if (_graphics_surface && _focused) {
             _graphics_surface->clear();
@@ -34,6 +37,11 @@ void android_application::run(const nori::application_arguments& arguments) {
             _graphics_surface->swap();
         }
     }
+}
+
+void android_application::shutdown() {
+    _graphics_surface.reset();
+    ::ANativeActivity_finish(_android_app->activity);
 }
 
 void android_application::_process_android_events(android_app* app) {
