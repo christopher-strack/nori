@@ -48,6 +48,12 @@ TEST(file, size) {
     ASSERT_EQ(file.size(), 7);
 }
 
+TEST(file, size_when_closed) {
+    nori::file file;
+
+    ASSERT_EQ(file.size(), 0);
+}
+
 TEST(file, read) {
     nori::file file("assets/file.txt");
     std::vector<char> buffer(file.size());
@@ -60,12 +66,27 @@ TEST(file, read) {
 
 TEST(file, read_some) {
     nori::file file("assets/file.txt");
-    std::vector<char> buffer(file.size() - 2);
+    std::vector<char> buffer1(file.size() - 2);
+    unsigned int bytes_read = 0;
+
+    bytes_read = file.read(&buffer1[0], buffer1.size());
+
+    ASSERT_EQ(bytes_read, buffer1.size());
+    ASSERT_EQ("conte", std::string(&buffer1[0], bytes_read));
+
+    std::vector<char> buffer2(2);
+    bytes_read = file.read(&buffer2[0], buffer2.size());
+    ASSERT_EQ(bytes_read, buffer2.size());
+    ASSERT_EQ("nt", std::string(&buffer2[0], bytes_read));
+}
+
+TEST(file, read_closed) {
+    nori::file file;
+    std::vector<char> buffer(1);
 
     unsigned int bytes_read = file.read(&buffer[0], buffer.size());
 
-    ASSERT_EQ(bytes_read, buffer.size());
-    ASSERT_EQ("conte", std::string(&buffer[0], bytes_read));
+    ASSERT_EQ(bytes_read, 0);
 }
 
 TEST(file, read_too_much) {

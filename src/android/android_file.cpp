@@ -57,11 +57,15 @@ bool android_file::is_open() const {
 }
 
 unsigned int android_file::size() {
-    return static_cast<unsigned int>(::AAsset_getLength(_asset));
+    return _asset != 0 ? static_cast<unsigned int>(::AAsset_getLength(_asset)) : 0;
 }
 
 unsigned int android_file::read(char* buffer, unsigned int size) {
-    return ::AAsset_read(_asset, buffer, size);
+    unsigned int bytes_read = 0;
+    if (_asset) {
+        bytes_read = ::AAsset_read(_asset, buffer, size);
+    }
+    return bytes_read;
 }
 
 } /* namespace detail */
