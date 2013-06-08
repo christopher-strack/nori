@@ -33,6 +33,8 @@ if (WIN32)
     find_package(OpenGl REQUIRED)
     set(GLEW_ROOT CACHE PATH "Path to GLEW")
     find_package(Glew REQUIRED)
+
+    add_definitions(/D_SCL_SECURE_NO_WARNINGS)
 endif()
 
 set(BOOST_ROOT CACHE PATH "Path to boost")
