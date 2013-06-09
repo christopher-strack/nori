@@ -1,6 +1,7 @@
 #ifndef NORI_IMAGE_H_
 #define NORI_IMAGE_H_
 
+#include "nori/detail/image_fwd.h"
 #include "nori/vector2.h"
 
 #include <vector>

@@ -9,6 +9,12 @@
 struct android_app;
 struct AInputEvent;
 
+namespace nori {
+
+class graphics;
+
+}
+
 
 namespace nori {
 namespace detail {
@@ -24,7 +30,7 @@ protected:
     virtual void on_initialized() {}
     virtual void on_window_created(window& window) {}
 
-    virtual void draw() {}
+    virtual void draw(graphics& graphics) {}
 
 private:
     void _process_android_events(android_app* app);

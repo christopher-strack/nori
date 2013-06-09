@@ -8,6 +8,13 @@
 
 
 namespace nori {
+
+class graphics;
+
+}
+
+
+namespace nori {
 namespace detail {
 
 class win_application {
@@ -19,7 +26,7 @@ protected:
     virtual void on_initialized() {}
     virtual void on_window_created(window& window) {}
 
-    virtual void draw() {}
+    virtual void draw(graphics& graphics) {}
 
 private:
     boost::shared_ptr<nori::window> _window;

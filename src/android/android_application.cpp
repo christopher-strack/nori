@@ -1,6 +1,7 @@
 #include "nori/detail/android_application.h"
 #include "nori/detail/android_graphics_surface.h"
 #include "nori/detail/android_file.h"
+#include "nori/graphics.h"
 
 #include <android_native_app_glue.h>
 #include <android/native_activity.h>
@@ -26,14 +27,14 @@ void android_application::run(const nori::application_arguments& arguments) {
 
     detail::android_file::asset_manager = _android_app->activity->assetManager;
 
-    on_initialized();
+    graphics graphics;
 
     while (_android_app->destroyRequested == 0) {
         _process_android_events(_android_app);
 
         if (_graphics_surface && _focused) {
             _graphics_surface->clear();
-            draw();
+            draw(graphics);
             _graphics_surface->swap();
         }
     }
@@ -60,6 +61,7 @@ void android_application::_on_android_command(android_app* app, int32_t cmd) {
     switch (cmd) {
     case APP_CMD_INIT_WINDOW:
         _graphics_surface = boost::make_shared<android_graphics_surface>(app->window);
+        on_initialized();
         break;
     case APP_CMD_TERM_WINDOW:
         _graphics_surface.reset();
