@@ -1,7 +1,7 @@
 #include "nori/shader.h"
 #include "nori/log.h"
 
-#include <string>
+#include <vector>
 
 
 namespace nori {
@@ -34,15 +34,30 @@ bool shader::is_valid() const {
     return _shader_id != 0;
 }
 
+GLuint shader::shader_id() const {
+    return _shader_id;
+}
+
 void shader::_log_infos(GLuint shader_id) {
     GLint info_length = 0;
     ::glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_length);
     if (info_length > 1) {
-        std::string info(info_length, '\0');
-        GLchar* gl_info = const_cast<GLchar*>(info.data());
-        ::glGetShaderInfoLog(shader_id, info_length, 0, gl_info);
-        log_warning(info.c_str());
+        std::vector<GLchar> info(info_length, '\0');
+        ::glGetShaderInfoLog(shader_id, info_length, 0, &info[0]);
+        log_warning(&info[0]);
     }
+}
+
+
+vertex_shader::vertex_shader(const char* source)
+    : shader(shader::vertex, source)
+{
+}
+
+
+fragment_shader::fragment_shader(const char* source)
+    : shader(shader::fragment, source)
+{
 }
 
 } /* namespace nori */
