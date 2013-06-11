@@ -6,10 +6,11 @@ namespace nori {
 namespace testing {
 
 const char vertex_shader_source[] =
+"uniform mat4 matrix; \n"
 "attribute vec4 position; \n"
 
 "void main() { \n"
-"    gl_Position = position; \n"
+"    gl_Position = position * matrix; \n"
 "} \n";
 
 const char fragment_shader_source[] =

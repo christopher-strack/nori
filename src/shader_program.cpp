@@ -12,34 +12,28 @@ shader_attribute::shader_attribute(const std::string& name, shader_program& prog
 {
     _attribute_id = ::glGetAttribLocation(program.program_id(), name.c_str());
 
-    if (!is_valid()) {
+    if (_attribute_id == -1) {
         throw std::runtime_error("Couldn't get attribute location");
     }
 }
 
 bool shader_attribute::is_valid() const {
-    return _attribute_id != -1 && _program.is_active();
+    return _program.is_active();
 }
 
 
-shader_attribute_map::shader_attribute_map(shader_program& program)
-    : _program(program)
+shader_uniform::shader_uniform(const std::string& name, shader_program& program)
+    : _program(program), _uniform_id(-1)
 {
+    _uniform_id = ::glGetUniformLocation(program.program_id(), name.c_str());
+
+    if (_uniform_id == -1) {
+        throw std::runtime_error("Couldn't get uniform location");
+    }
 }
 
-shader_attribute_map::mapped_type& shader_attribute_map::operator[](
-    const key_type& key)
-{
-    if (!_program.is_active()) {
-        throw std::runtime_error(
-            "Cannot access attributes when the shader is not active.");
-    }
-
-    iterator it = find(key);
-    if (it == end()) {
-        it = this->insert(it, value_type(key, mapped_type(key, _program)));
-    }
-    return it->second;
+bool shader_uniform::is_valid() const {
+    return _program.is_active();
 }
 
 
@@ -51,7 +45,7 @@ shader_program::shader_program(
     : _program_id(0),
       _vertex_shader_id(vertex_shader.shader_id()),
       _fragment_shader_id(fragment_shader.shader_id()),
-      attributes(*this)
+      attributes(*this), uniforms(*this)
 {
     _program_id = ::glCreateProgram();
     if (_program_id) {

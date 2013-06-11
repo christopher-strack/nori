@@ -51,8 +51,6 @@ TEST_F(shader_program_fixture, attribute) {
 
     program.activate();
     nori::shader_attribute& attribute = program.attributes["position"];
-
-    ASSERT_TRUE(attribute.is_valid());
 }
 
 TEST_F(shader_program_fixture, invalid_attribute) {
@@ -66,6 +64,7 @@ TEST_F(shader_program_fixture, invalid_program_state) {
     nori::shader_program program = create_program();
 
     ASSERT_THROW(program.attributes["position"], std::runtime_error);
+    ASSERT_THROW(program.uniforms["matrix"], std::runtime_error);
 }
 
 TEST_F(shader_program_fixture, attribute_state) {
@@ -80,4 +79,18 @@ TEST_F(shader_program_fixture, attribute_state) {
     program2.activate();
 
     ASSERT_FALSE(attribute.is_valid());
+}
+
+TEST_F(shader_program_fixture, uniform) {
+    nori::shader_program program = create_program();
+
+    program.activate();
+    nori::shader_uniform& uniform= program.uniforms["matrix"];
+}
+
+TEST_F(shader_program_fixture, invalid_uniform) {
+    nori::shader_program program = create_program();
+
+    program.activate();
+    ASSERT_THROW(program.uniforms["invalid_name"], std::runtime_error);
 }

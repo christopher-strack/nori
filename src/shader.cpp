@@ -20,14 +20,16 @@ shader::shader(shader_type type, const char* source)
         GLint compiled = GL_FALSE;
         ::glGetShaderiv(_shader_id, GL_COMPILE_STATUS, &compiled);
         if (compiled == GL_FALSE) {
-            log_error("Could not compile shader. \n");
             std::string shader_infos = _get_shader_infos(_shader_id);
             ::glDeleteShader(_shader_id);
             _shader_id = 0;
             throw std::runtime_error(shader_infos);
         }
         else {
-            log_warning(_get_shader_infos(_shader_id).c_str());
+            std::string shader_infos = _get_shader_infos(_shader_id);
+            if (!shader_infos.empty()) {
+                log_warning(shader_infos.c_str());
+            }
         }
     }
 }
