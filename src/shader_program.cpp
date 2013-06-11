@@ -53,33 +53,30 @@ shader_program::shader_program(
       _fragment_shader_id(fragment_shader.shader_id()),
       attributes(*this)
 {
-    if (vertex_shader.is_valid() && fragment_shader.is_valid()) {
-        _program_id = ::glCreateProgram();
-        if (_program_id) {
-            ::glAttachShader(_program_id, _vertex_shader_id);
-            ::glAttachShader(_program_id, _fragment_shader_id);
-            ::glLinkProgram(_program_id);
+    _program_id = ::glCreateProgram();
+    if (_program_id) {
+        ::glAttachShader(_program_id, _vertex_shader_id);
+        ::glAttachShader(_program_id, _fragment_shader_id);
+        ::glLinkProgram(_program_id);
 
-            GLint link_status = GL_FALSE;
-            ::glGetProgramiv(_program_id, GL_LINK_STATUS, &link_status);
-            if (link_status == GL_FALSE) {
-                log_error("Could not link program.");
-                _log_infos(_program_id);
-                ::glDeleteProgram(_program_id);
-                _program_id = 0;
-            }
+        GLint link_status = GL_FALSE;
+        ::glGetProgramiv(_program_id, GL_LINK_STATUS, &link_status);
+        if (link_status == GL_FALSE) {
+            std::string program_infos = _get_program_infos(program_id());
+            ::glDeleteProgram(_program_id);
+            _program_id = 0;
+            throw std::runtime_error(program_infos);
         }
     }
-}
+    else {
+        throw std::runtime_error("Couldn't create shader program.");
+    }
+ }
 
 shader_program::~shader_program() {
     ::glDetachShader(_program_id, _vertex_shader_id);
     ::glDetachShader(_program_id, _fragment_shader_id);
     ::glDeleteProgram(_program_id);
-}
-
-bool shader_program::is_valid() const {
-    return _program_id != 0;
 }
 
 void shader_program::activate() {
@@ -91,20 +88,20 @@ bool shader_program::is_active() const {
     return _active_program_id == _program_id;
 }
 
-void shader_program::_log_infos(GLuint program)
-{
-    GLint info_length = 0;
-    ::glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_length);
-    if (info_length > 1) {
-        std::vector<GLchar> info(info_length, '\0');
-        ::glGetProgramInfoLog(program, info_length, 0, &info[0]);
-        ::glDeleteShader(program);
-        log_warning(&info[0]);
-    }
-}
-
 GLuint shader_program::program_id() const {
     return _program_id;
+}
+
+std::string shader_program::_get_program_infos(GLuint program_id) {
+    GLint info_length = 0;
+    ::glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &info_length);
+    std::vector<GLchar> info(info_length, '\0');
+    if (info_length > 1) {
+        ::glGetProgramInfoLog(program_id, info_length, 0, &info[0]);
+        ::glDeleteShader(program_id);
+        log_warning(&info[0]);
+    }
+    return &info[0];
 }
 
 } /* namespace nori */

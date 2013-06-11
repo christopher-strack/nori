@@ -48,8 +48,6 @@ public:
         const fragment_shader& fragment_shader);
     ~shader_program();
 
-    bool is_valid() const;
-
     void activate();
     bool is_active() const;
 
@@ -58,7 +56,7 @@ public:
     shader_attribute_map attributes;
 
 private:
-    void _log_infos(GLuint program);
+    std::string _get_program_infos(GLuint program_id);
 
     GLuint _program_id;
     GLuint _vertex_shader_id;

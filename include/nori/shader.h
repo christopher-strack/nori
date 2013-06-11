@@ -3,6 +3,8 @@
 
 #include "nori/detail/opengl_fwd.h"
 
+#include <string>
+
 
 namespace nori {
 
@@ -16,12 +18,10 @@ public:
     shader(shader_type type, const char* source);
     ~shader();
 
-    bool is_valid() const;
-
     GLuint shader_id() const;
 
 private:
-    void _log_infos(GLuint shader_id);
+    std::string _get_shader_infos(GLuint shader_id);
 
     GLuint _shader_id;
 };

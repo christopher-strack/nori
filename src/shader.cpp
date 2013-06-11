@@ -2,6 +2,7 @@
 #include "nori/log.h"
 
 #include <vector>
+#include <stdexcept>
 
 
 namespace nori {
@@ -20,36 +21,33 @@ shader::shader(shader_type type, const char* source)
         ::glGetShaderiv(_shader_id, GL_COMPILE_STATUS, &compiled);
         if (compiled == GL_FALSE) {
             log_error("Could not compile shader. \n");
-            _log_infos(_shader_id);
+            std::string shader_infos = _get_shader_infos(_shader_id);
             ::glDeleteShader(_shader_id);
             _shader_id = 0;
+            throw std::runtime_error(shader_infos);
         }
         else {
-            _log_infos(_shader_id);
+            log_warning(_get_shader_infos(_shader_id).c_str());
         }
     }
 }
 
-bool shader::is_valid() const {
-    return _shader_id != 0;
+shader::~shader() {
+    ::glDeleteShader(_shader_id);
 }
 
 GLuint shader::shader_id() const {
     return _shader_id;
 }
 
-void shader::_log_infos(GLuint shader_id) {
+std::string shader::_get_shader_infos(GLuint shader_id) {
     GLint info_length = 0;
     ::glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_length);
-    if (info_length > 1) {
-        std::vector<GLchar> info(info_length, '\0');
+    std::vector<GLchar> info(info_length, '\0');
+    if (info_length > 1) {    
         ::glGetShaderInfoLog(shader_id, info_length, 0, &info[0]);
-        log_warning(&info[0]);
     }
-}
-
-shader::~shader() {
-    ::glDeleteShader(_shader_id);
+    return &info[0];
 }
 
 
