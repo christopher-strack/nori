@@ -11,6 +11,7 @@ option(NORI_BUILD_SAMPLES "Build nori samples" ON)
 # nori library
 if (WIN32)
     set(nori_platform_folder "windows")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4355 /wd4996")
 elseif (ANDROID)
     set(ANDROID_NATIVE_API_LEVEL 14)
     set(nori_platform_folder "android")
