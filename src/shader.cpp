@@ -48,6 +48,10 @@ void shader::_log_infos(GLuint shader_id) {
     }
 }
 
+shader::~shader() {
+    ::glDeleteShader(_shader_id);
+}
+
 
 vertex_shader::vertex_shader(const char* source)
     : shader(shader::vertex, source)

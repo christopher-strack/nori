@@ -14,6 +14,7 @@ public:
     };
 
     shader(shader_type type, const char* source);
+    ~shader();
 
     bool is_valid() const;
 
