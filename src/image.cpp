@@ -4,6 +4,9 @@
 
 #include "lodepng/lodepng.h"
 
+#include <stdexcept>
+#include <sstream>
+
 
 namespace nori {
 
@@ -18,19 +21,20 @@ image::image(const char* filename) {
         unsigned int width, height;
         unsigned error = lodepng::decode(_data, width, height, state, file_buffer);
 
-        if (!error) {
-            _size.x = width;
-            _size.y = height;
+        if (error) {
+            std::stringstream stream;
+            stream << "Error loading image '" << filename
+                << "': " << lodepng_error_text(error);
+            throw std::runtime_error(stream.str());
         }
-        else {
-            log_error(
-                "Error loading image '%s': %s",
-                filename,
-                lodepng_error_text(error));
-        }
+
+        _size.x = width;
+        _size.y = height;
     }
     else {
-        log_error("Couldn't load image. File '%s' doesn't exist.", filename);
+        std::stringstream stream;
+        stream << "Couldn't load image. File '" << filename << "' doesn't exist.";
+        throw std::runtime_error(stream.str());
     }
 }
 

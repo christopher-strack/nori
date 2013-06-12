@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 #include <nori/image.h>
 
-#include <vector>
 #include <boost/assign.hpp>
+
+#include <vector>
+#include <stdexcept>
 
 
 TEST(image, construct) {
@@ -12,10 +14,7 @@ TEST(image, construct) {
 }
 
 TEST(image, invalid_path) {
-    nori::image image("assets/invalid_image.png");
-
-    ASSERT_EQ(image.size(), nori::size(0, 0));
-    ASSERT_EQ(image.data().size(), 0);
+    ASSERT_THROW(nori::image("assets/invalid_image.png"), std::runtime_error);
 }
 
 TEST(image, data) {
