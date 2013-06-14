@@ -12,8 +12,9 @@
 
 class basic_drawing_app : public nori::application {
 public:
-    virtual void on_initialized() {
-        _image = boost::make_shared<nori::image>("assets/image.png");
+    basic_drawing_app()
+        : _image("assets/image.png")
+    {
     }
 
     virtual void on_window_created(nori::window& window) {
@@ -25,7 +26,7 @@ public:
     }
 
 private:
-    nori::image_ptr _image;
+    nori::image _image;
 };
 
 

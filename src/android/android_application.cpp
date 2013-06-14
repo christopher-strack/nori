@@ -25,7 +25,6 @@ void android_application::run(const nori::application_arguments& arguments) {
     _android_app->onAppCmd = &_on_android_command_proxy;
     _android_app->onInputEvent = &_on_android_input_proxy;
 
-    detail::android_file::asset_manager = _android_app->activity->assetManager;
     while (_android_app->destroyRequested == 0) {
         _process_android_events(_android_app);
 

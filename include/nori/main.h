@@ -10,11 +10,13 @@ extern int nori_main(const nori::application_arguments& arguments);
 
 #if defined(ANDROID)
 
+#include "nori/detail/android_file.h"
 #include <android_native_app_glue.h>
 
 
 void android_main(android_app* app) {
     nori::application_arguments args = { 0, 0, app };
+    nori::detail::android_file::asset_manager = app->activity->assetManager;
     app_dummy(); // Make sure glue isn't stripped.
     nori_main(args);
 }
