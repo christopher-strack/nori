@@ -11,7 +11,7 @@
 
 class basic_drawing_app : public nori::application {
 public:
-    virtual void on_initialize() {
+    virtual void on_initialized() {
         _image = boost::make_shared<nori::image>("assets/image.png");
     }
 
