@@ -1,6 +1,7 @@
 #include "nori/shader_program.h"
 #include "nori/shader.h"
 #include "nori/log.h"
+#include "nori/matrix4.h"
 
 #include <stdexcept>
 
@@ -21,6 +22,17 @@ shader_attribute::shader_attribute(const std::string& name, shader_program& prog
     }
 }
 
+shader_attribute& shader_attribute::operator=(const vertex_buffer& vertices) {
+    if (!is_valid()) {
+        throw std::runtime_error("Uniform can only be changed when program is active");
+    }
+    if (!vertices.empty()) {
+        ::glVertexAttribPointer(_attribute_id, 2, GL_FLOAT, GL_FALSE, 0, &vertices[0]);
+        ::glEnableVertexAttribArray(_attribute_id);
+    }
+    return *this;
+}
+
 bool shader_attribute::is_valid() const {
     return _program.is_active();
 }
@@ -38,6 +50,14 @@ shader_uniform::shader_uniform(const std::string& name, shader_program& program)
     if (_uniform_id == -1) {
         throw std::runtime_error("Couldn't get uniform location");
     }
+}
+
+shader_uniform& shader_uniform::operator=(const matrix4& matrix) {
+    if (!is_valid()) {
+        throw std::runtime_error("Uniform can only be changed when program is active");
+    }
+    ::glUniformMatrix4fv(_uniform_id, 1, false, matrix.elements);
+    return *this;
 }
 
 bool shader_uniform::is_valid() const {

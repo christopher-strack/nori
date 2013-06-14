@@ -11,14 +11,19 @@
 
 namespace nori {
 
+class matrix4;
 class vertex_shader;
 class fragment_shader;
 class shader_program;
+
+typedef std::vector<float> vertex_buffer;
 
 
 class shader_attribute {
 public:
     shader_attribute(const std::string& name, shader_program& program);
+
+    shader_attribute& operator=(const vertex_buffer& vertices);
 
     bool is_valid() const;
 
@@ -32,6 +37,8 @@ private:
 class shader_uniform {
 public:
     shader_uniform(const std::string& name, shader_program& program);
+
+    shader_uniform& operator=(const matrix4& matrix);
 
     bool is_valid() const;
 

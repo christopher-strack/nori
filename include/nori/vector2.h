@@ -22,7 +22,7 @@ public:
 
 typedef vector2<int> size;
 typedef vector2<int> point;
-
+typedef vector2<float> point_f;
 
 
 template<typename T>
