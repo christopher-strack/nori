@@ -4,6 +4,7 @@
 #include <nori/window.h>
 #include <nori/log.h>
 #include <nori/image.h>
+#include <nori/texture.h>
 
 #include <boost/make_shared.hpp>
 
@@ -13,20 +14,25 @@
 class basic_drawing_app : public nori::application {
 public:
     basic_drawing_app()
-        : _image("assets/image.png")
     {
+    }
+
+    virtual bool on_initialized() {
+        _texture = boost::make_shared<nori::texture>(nori::image("assets/megaman.png"));
+        return true;
     }
 
     virtual void on_window_created(nori::window& window) {
         window.set_size(nori::size(1024, 768));
-        window.set_title("simple sample");
+        window.set_title("basic drawing");
     }
 
     virtual void render(nori::renderer& renderer) {
+        renderer.render(*_texture, nori::point_f(100, 50), nori::size_f(256, 256));
     }
 
 private:
-    nori::image _image;
+    nori::texture_ptr _texture;
 };
 
 
