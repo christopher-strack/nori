@@ -43,22 +43,23 @@ private:
 
 
 template<typename T>
-class shader_object_map : private std::map<std::string, T> {
+class shader_object_map : public std::map<std::string, T> {
 public:
+    typedef std::map<std::string, T> base_type;
+    typedef typename base_type::mapped_type mapped_type;
+    typedef typename base_type::key_type key_type;
+    typedef typename base_type::value_type value_type;
+    typedef typename base_type::iterator iterator;
+
     shader_object_map(shader_program& program)
         : _program(program)
     {
     }
 
     mapped_type& operator[](const key_type& key) {
-        if (!_program.is_active()) {
-            throw std::runtime_error(
-                "Cannot access attributes when the shader is not active.");
-        }
-
-        iterator it = find(key);
-        if (it == end()) {
-            it = this->insert(it, value_type(key, mapped_type(key, _program)));
+        iterator it = base_type::find(key);
+        if (it == base_type::end()) {
+            it = base_type::insert(it, value_type(key, mapped_type(key, _program)));
         }
         return it->second;
     }

@@ -10,6 +10,10 @@ namespace nori {
 shader_attribute::shader_attribute(const std::string& name, shader_program& program)
     : _program(program), _attribute_id(-1)
 {
+    if (!program.is_active()) {
+        throw std::runtime_error("Trying create a shader attribute at an invalid state.");
+    }
+
     _attribute_id = ::glGetAttribLocation(program.program_id(), name.c_str());
 
     if (_attribute_id == -1) {
@@ -25,6 +29,10 @@ bool shader_attribute::is_valid() const {
 shader_uniform::shader_uniform(const std::string& name, shader_program& program)
     : _program(program), _uniform_id(-1)
 {
+    if (!program.is_active()) {
+        throw std::runtime_error("Trying create a shader uniform at an invalid state.");
+    }
+
     _uniform_id = ::glGetUniformLocation(program.program_id(), name.c_str());
 
     if (_uniform_id == -1) {
