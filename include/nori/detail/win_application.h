@@ -3,15 +3,9 @@
 
 #include "nori/window.h"
 #include "nori/application_arguments.h"
+#include "nori/detail/renderer_fwd.h"
 
 #include <boost/shared_ptr.hpp>
-
-
-namespace nori {
-
-class graphics;
-
-}
 
 
 namespace nori {
@@ -20,13 +14,12 @@ namespace detail {
 class win_application {
 public:
     void run(const nori::application_arguments& arguments);
-    void shutdown();
 
 protected:
-    virtual void on_initialized() {}
+    virtual bool on_initialized() { return true; }
     virtual void on_window_created(window& window) {}
 
-    virtual void draw(graphics& graphics) {}
+    virtual void render(renderer& renderer) {}
 
 private:
     boost::shared_ptr<nori::window> _window;

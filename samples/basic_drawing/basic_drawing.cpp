@@ -1,12 +1,13 @@
 #include <nori/main.h>
 #include <nori/application.h>
-#include <nori/graphics.h>
+#include <nori/renderer.h>
 #include <nori/window.h>
 #include <nori/log.h>
 #include <nori/image.h>
 
-#include <stdexcept>
 #include <boost/make_shared.hpp>
+
+#include <stdexcept>
 
 
 class basic_drawing_app : public nori::application {
@@ -20,9 +21,7 @@ public:
         window.set_title("simple sample");
     }
 
-
-    virtual void draw(nori::graphics& graphics) {
-        graphics.draw(_image, nori::point(10, 10));
+    virtual void render(nori::renderer& renderer) {
     }
 
 private:

@@ -20,7 +20,7 @@ public:
     int result;
 
 protected:
-    virtual void on_initialized() {
+    virtual bool on_initialized() {
         int argc = _application_arguments.argc;
         ::testing::InitGoogleTest(&argc, _application_arguments.argv);
 
@@ -30,7 +30,7 @@ protected:
 
         result = RUN_ALL_TESTS();
 
-        shutdown();
+        return false;
     }
 
 private:

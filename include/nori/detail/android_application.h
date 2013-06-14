@@ -4,16 +4,11 @@
 #include "nori/window.h"
 #include "nori/application_arguments.h"
 #include "nori/detail/graphics_surface_fwd.h"
+#include "nori/detail/renderer_fwd.h"
 
 
 struct android_app;
 struct AInputEvent;
-
-namespace nori {
-
-class graphics;
-
-}
 
 
 namespace nori {
@@ -24,13 +19,12 @@ public:
     android_application();
 
     void run(const nori::application_arguments& arguments);
-    void shutdown();
 
 protected:
-    virtual void on_initialized() {}
+    virtual bool on_initialized() { return true; }
     virtual void on_window_created(window& window) {}
 
-    virtual void draw(graphics& graphics) {}
+    virtual void render(renderer& renderer) {}
 
 private:
     void _process_android_events(android_app* app);
@@ -42,6 +36,7 @@ private:
 
     bool _focused;
     graphics_surface_ptr _graphics_surface;
+    renderer_ptr _renderer;
     android_app* _android_app;
 };
 

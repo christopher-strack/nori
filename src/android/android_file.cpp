@@ -29,11 +29,6 @@ android_file::~android_file() {
 }
 
 bool android_file::open(const char* filename) {
-    if (asset_manager == NULL) {
-        throw std::runtime_error(
-            "Couldn't open file. Files can only be opened after 'on_initialized'.");
-    }
-
     static const std::string asset_folder = "assets/";
     if (boost::starts_with(filename, asset_folder)) {
         std::string asset_filename = std::string(filename).substr(asset_folder.size());

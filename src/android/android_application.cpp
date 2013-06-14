@@ -1,7 +1,7 @@
 #include "nori/detail/android_application.h"
 #include "nori/detail/android_graphics_surface.h"
 #include "nori/detail/android_file.h"
-#include "nori/graphics.h"
+#include "nori/renderer.h"
 
 #include <android_native_app_glue.h>
 #include <android/native_activity.h>
@@ -26,23 +26,15 @@ void android_application::run(const nori::application_arguments& arguments) {
     _android_app->onInputEvent = &_on_android_input_proxy;
 
     detail::android_file::asset_manager = _android_app->activity->assetManager;
-
-    graphics graphics;
-
     while (_android_app->destroyRequested == 0) {
         _process_android_events(_android_app);
 
         if (_graphics_surface && _focused) {
             _graphics_surface->clear();
-            draw(graphics);
+            render(*_renderer);
             _graphics_surface->swap();
         }
     }
-}
-
-void android_application::shutdown() {
-    _graphics_surface.reset();
-    ::ANativeActivity_finish(_android_app->activity);
 }
 
 void android_application::_process_android_events(android_app* app) {
@@ -61,9 +53,15 @@ void android_application::_on_android_command(android_app* app, int32_t cmd) {
     switch (cmd) {
     case APP_CMD_INIT_WINDOW:
         _graphics_surface = boost::make_shared<android_graphics_surface>(app->window);
-        on_initialized();
+        _renderer = boost::make_shared<renderer>();
+        if (!on_initialized()) {
+            _renderer.reset();
+            _graphics_surface.reset();
+            ::ANativeActivity_finish(_android_app->activity);
+        }
         break;
     case APP_CMD_TERM_WINDOW:
+        _renderer.reset();
         _graphics_surface.reset();
         break;
 
