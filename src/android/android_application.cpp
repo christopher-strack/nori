@@ -52,7 +52,7 @@ void android_application::_on_android_command(android_app* app, int32_t cmd) {
     switch (cmd) {
     case APP_CMD_INIT_WINDOW:
         _graphics_surface = boost::make_shared<android_graphics_surface>(app->window);
-        _renderer = boost::make_shared<renderer>();
+        _renderer = boost::make_shared<renderer>(_graphics_surface);
         if (!on_initialized()) {
             _renderer.reset();
             _graphics_surface.reset();

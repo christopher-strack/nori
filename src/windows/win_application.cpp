@@ -12,7 +12,7 @@ void win_application::run(const nori::application_arguments& arguments) {
     _window = boost::make_shared<window>();
     on_window_created(*_window);
     graphics_surface_ptr surface = _window->graphics_surface();
-    renderer renderer;
+    renderer renderer(surface);
 
     if (on_initialized()) {
         _window->set_visible(true);
