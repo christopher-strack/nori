@@ -6,6 +6,8 @@
 TEST(texture, construct) {
     nori::image image("assets/image.png");
     nori::texture t(image);
+
+    ASSERT_EQ(t.size(), image.size());
 }
 
 TEST(texture, bind) {
