@@ -117,13 +117,13 @@ GLuint shader_program::program_id() const {
 std::string shader_program::_get_program_infos(GLuint program_id) {
     GLint info_length = 0;
     ::glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &info_length);
-    std::vector<GLchar> info(info_length, '\0');
     if (info_length > 1) {
+        std::vector<GLchar> info(info_length, '\0');
         ::glGetProgramInfoLog(program_id, info_length, 0, &info[0]);
         ::glDeleteShader(program_id);
-        log_warning(&info[0]);
+        return std::string(&info[0]);
     }
-    return &info[0];
+    return "";
 }
 
 } /* namespace nori */

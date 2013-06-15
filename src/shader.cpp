@@ -45,11 +45,12 @@ GLuint shader::shader_id() const {
 std::string shader::_get_shader_infos(GLuint shader_id) {
     GLint info_length = 0;
     ::glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_length);
-    std::vector<GLchar> info(info_length, '\0');
-    if (info_length > 1) {    
+    if (info_length > 1) {
+        std::vector<GLchar> info(info_length, '\0');
         ::glGetShaderInfoLog(shader_id, info_length, 0, &info[0]);
+        return std::string(&info[0]);
     }
-    return &info[0];
+    return "";
 }
 
 
