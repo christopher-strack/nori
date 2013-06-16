@@ -12,11 +12,14 @@ namespace nori {
 class texture {
 public:
     texture(const image& image);
+    texture(const nori::size& size);
     ~texture();
 
     nori::size size() const;
 
     void bind();
+
+    static int max_size();
 
 private:
     nori::size _size;
