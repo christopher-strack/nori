@@ -15,8 +15,11 @@ public:
 
     image(const char* filename);
 
-    nori::size size() const;
-    image_buffer data() const;
+    virtual nori::size size() const;
+    virtual image_buffer data() const;
+
+protected:
+    image();
 
 private:
     image_buffer _data;

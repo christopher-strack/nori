@@ -38,6 +38,9 @@ image::image(const char* filename) {
     }
 }
 
+image::image() {
+}
+
 nori::size image::size() const {
     return _size;
 }

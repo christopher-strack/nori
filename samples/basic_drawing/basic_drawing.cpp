@@ -4,7 +4,8 @@
 #include <nori/window.h>
 #include <nori/log.h>
 #include <nori/image.h>
-#include <nori/texture.h>
+#include <nori/texture_atlas.h>
+#include <nori/rectangle.h>
 
 #include <boost/make_shared.hpp>
 
@@ -13,12 +14,9 @@
 
 class basic_drawing_app : public nori::application {
 public:
-    basic_drawing_app()
-    {
-    }
-
     virtual bool on_initialized() {
-        _texture = boost::make_shared<nori::texture>(nori::image("assets/megaman.png"));
+        _texture = boost::make_shared<nori::texture_atlas>();
+        _texture->add(nori::image("assets/megaman.png"), _coords);
         return true;
     }
 
@@ -28,11 +26,14 @@ public:
     }
 
     virtual void render(nori::renderer& renderer) {
-        renderer.render(*_texture, nori::point_f(100, 50), nori::size_f(256, 256));
+        renderer.render(
+            *_texture, _coords,
+            nori::point_f(100, 50), nori::size_f(256, 256));
     }
 
 private:
-    nori::texture_ptr _texture;
+    nori::rectangle_f _coords;
+    nori::texture_atlas_ptr _texture;
 };
 
 

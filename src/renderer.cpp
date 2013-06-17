@@ -25,6 +25,14 @@ renderer::renderer(graphics_surface_ptr graphics_surface)
 }
 
 void renderer::render(texture& texture, const point_f& position, const size_f& size) {
+    rectangle_f coords(point_f(0.0f, 0.0f), point_f(1.0f, 1.0f));
+    render(texture, coords, position, size);
+}
+
+void renderer::render(
+    texture& texture, const rectangle_f& coords,
+    const point_f& position, const size_f& size)
+{
     using namespace boost::assign;
 
     ::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -40,7 +48,8 @@ void renderer::render(texture& texture, const point_f& position, const size_f& s
 
     rectangle_f r(position, size);
     points += r.left, r.top, r.right, r.top, r.left, r.bottom, r.right, r.bottom;
-    uvs += 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f;
+    uvs += coords.left, coords.top, coords.right, coords.top,
+        coords.left, coords.bottom, coords.right, coords.bottom;
 
     _program->attributes["position"] = points;
     _program->attributes["uv"] = uvs;

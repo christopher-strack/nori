@@ -16,6 +16,14 @@ public:
     bool operator==(const vector2<T>& other) const;
     bool operator!=(const vector2<T>& other) const;
 
+    vector2<T> operator*(T scalar) {
+        return vector2<T>(x * scalar, y * scalar);
+    }
+
+    vector2<T> operator/(T scalar) {
+        return vector2<T>(x / scalar, y / scalar);
+    }
+
     T x;
     T y;
 };

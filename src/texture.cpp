@@ -7,9 +7,8 @@
 namespace nori {
 
 texture::texture(const image& image)
-    : _texture_id(-1)
+    : _texture_id(-1), _size(image.size())
 {
-    _size = image.size();
     ::glGenTextures(1, &_texture_id);
     bind();
     ::glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -18,13 +17,12 @@ texture::texture(const image& image)
 }
 
 texture::texture(const nori::size& size)
-    : _texture_id(-1)
+    : _texture_id(-1), _size(size)
 {
     int max = max_size();
     if (size.x > max || size.y > max) {
         throw std::runtime_error("Texture size too big.");
     }
-    _size = size;
     image::image_buffer empty;
     empty.resize(size.x * size.y * 4);
     ::glGenTextures(1, &_texture_id);
@@ -43,7 +41,7 @@ nori::size texture::size() const {
 }
 
 int texture::max_size() {
-    GLint max_texture_size;
+    GLint max_texture_size = 0;
     ::glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
     return max_texture_size;
 }

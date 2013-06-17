@@ -9,12 +9,42 @@ namespace nori {
 template<typename T>
 class rectangle_t {
 public:
-    rectangle_t(const vector2<T>& position, const vector2<T>& size)
-        : left(position.x),
-          top(position.y),
-          right(position.x + size.x),
-          bottom(position.y + size.y)
+    rectangle_t(T left, T top, T right, T bottom)
+        : left(left), top(top), right(right), bottom(bottom)
     {
+    }
+
+    rectangle_t()
+        : left(0), top(0), right(0), bottom(0)
+    {
+    }
+
+    rectangle_t(const vector2<T>& position, const vector2<T>& size)
+        : left(position.x), top(position.y),
+        right(position.x + size.x), bottom(position.y + size.y)
+    {
+    }
+
+    bool operator==(const rectangle_t<T>& other) const {
+      return left == other.left && top == other.top &&
+          right == other.right && bottom == other.bottom;
+    }
+
+    bool operator!=(const rectangle_t<T>& other) const {
+        return !operator==(other);
+    }
+
+    vector2<T> position() const {
+        return vector2<T>(left, top);
+    }
+
+    vector2<T> size() const {
+        return vector2<T>(right - left, bottom - top);
+    }
+
+    bool inside(const rectangle_t<T>& other) {
+        return left >= other.left && top >= other.top
+            && right <= other.right && bottom <= other.bottom;
     }
 
     T left, top, right, bottom;
