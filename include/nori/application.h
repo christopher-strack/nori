@@ -18,4 +18,4 @@ typedef detail::android_application application;
 
 } // namespace nori
 
-#endif /* NORI_APPLICATION_H_ */
+#endif // NORI_APPLICATION_H_

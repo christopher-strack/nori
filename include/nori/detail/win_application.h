@@ -28,4 +28,4 @@ private:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_WIN_APPLICATION_H_ */
+#endif // NORI_WIN_APPLICATION_H_

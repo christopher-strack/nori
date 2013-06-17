@@ -19,4 +19,4 @@ typedef detail::android_file file;
 
 } // namespace nori
 
-#endif /* NORI_FILE_H_ */
+#endif // NORI_FILE_H_

@@ -19,4 +19,4 @@ protected:
 } // namespace testing
 } // namespace nori
 
-#endif /* NORI_OUTPUT_PRINTER_H_ */
+#endif // NORI_OUTPUT_PRINTER_H_

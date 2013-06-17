@@ -31,4 +31,4 @@ private:
 } // namespace testing
 } // namespace nori
 
-#endif /* NORI_IMAGE_MOCK_H_ */
+#endif // NORI_IMAGE_MOCK_H_

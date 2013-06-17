@@ -21,4 +21,4 @@ const char fragment_shader_source[] =
 } // namespace testing
 } // namespace nori
 
-#endif /* NORI_TEST_SHADERS_H_ */
+#endif // NORI_TEST_SHADERS_H_

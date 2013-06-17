@@ -9,4 +9,4 @@ void log_error(const char* message, ...);
 
 } // namespace nori
 
-#endif /* NORI_LOG_H_ */
+#endif // NORI_LOG_H_

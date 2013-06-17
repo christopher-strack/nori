@@ -31,4 +31,4 @@ int main(int argc, char** argv) {
 #endif
 
 
-#endif /* NORI_MAIN_H_ */
+#endif // NORI_MAIN_H_

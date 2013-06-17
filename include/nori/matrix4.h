@@ -18,4 +18,4 @@ public:
 
 } // namespace nori
 
-#endif /* NORI_MATRIX4_H_ */
+#endif // NORI_MATRIX4_H_

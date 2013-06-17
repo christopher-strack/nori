@@ -30,4 +30,4 @@ struct application_arguments {
 #endif
 
 
-#endif /* NORI_APPLICATION_ARGUMENTS_H_ */
+#endif // NORI_APPLICATION_ARGUMENTS_H_

@@ -16,4 +16,4 @@ const char* log_priority_to_tag(nori::detail::log_priority priority);
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_LOG_PRIORITY_H_ */
+#endif // NORI_LOG_PRIORITY_H_

@@ -32,4 +32,4 @@ private:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_ANDROID_FILE_H_ */
+#endif // NORI_ANDROID_FILE_H_

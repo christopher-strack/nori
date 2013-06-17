@@ -27,4 +27,4 @@ private:
 
 } // namespace nori
 
-#endif /* NORI_TEXTURE_ATLAS_H_ */
+#endif // NORI_TEXTURE_ATLAS_H_

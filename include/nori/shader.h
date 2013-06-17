@@ -40,4 +40,4 @@ public:
 
 } // namespace nori
 
-#endif /* NORI_SHADER_H_ */
+#endif // NORI_SHADER_H_

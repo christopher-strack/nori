@@ -11,4 +11,4 @@ typedef boost::shared_ptr<image> image_ptr;
 
 } // namespace nori
 
-#endif /* NORI_IMAGE_FWD_H_ */
+#endif // NORI_IMAGE_FWD_H_

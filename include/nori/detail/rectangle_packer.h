@@ -37,4 +37,4 @@ private:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_RECTANGLE_PACKER_H_ */
+#endif // NORI_RECTANGLE_PACKER_H_

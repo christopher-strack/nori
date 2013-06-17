@@ -36,4 +36,4 @@ public:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_NULL_WINDOW_H_ */
+#endif // NORI_NULL_WINDOW_H_

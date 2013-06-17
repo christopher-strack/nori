@@ -11,4 +11,4 @@ typedef boost::shared_ptr<renderer> renderer_ptr;
 
 } // namespace nori
 
-#endif /* NORI_RENDERER_FWD_H_ */
+#endif // NORI_RENDERER_FWD_H_

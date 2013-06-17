@@ -11,4 +11,4 @@ typedef boost::shared_ptr<texture> texture_ptr;
 
 } // namespace nori
 
-#endif /* NORI_TEXTURE_FWD_H_ */
+#endif // NORI_TEXTURE_FWD_H_

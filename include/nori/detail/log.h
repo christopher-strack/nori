@@ -15,4 +15,4 @@ void log(log_priority priority, const char* message, va_list args);
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_DETAIL_LOG_H_ */
+#endif // NORI_DETAIL_LOG_H_

@@ -17,4 +17,4 @@ public:
 
 } // namespace nori
 
-#endif /* NORI_GRAPHICS_SURFACE_H_ */
+#endif // NORI_GRAPHICS_SURFACE_H_

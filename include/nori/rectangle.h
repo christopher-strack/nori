@@ -55,4 +55,4 @@ typedef rectangle_t<float> rectangle_f;
 
 } // namespace nori
 
-#endif /* NORI_RECTANGLE_H_ */
+#endif // NORI_RECTANGLE_H_

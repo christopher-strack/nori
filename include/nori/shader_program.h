@@ -108,4 +108,4 @@ private:
 
 } // namespace nori
 
-#endif /* NORI_SHADER_PROGRAM_H_ */
+#endif // NORI_SHADER_PROGRAM_H_

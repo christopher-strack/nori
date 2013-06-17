@@ -60,4 +60,4 @@ private:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_WIN_WINDOW_ */
+#endif // NORI_WIN_WINDOW_

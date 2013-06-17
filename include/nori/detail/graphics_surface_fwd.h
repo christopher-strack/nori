@@ -11,4 +11,4 @@ typedef boost::shared_ptr<graphics_surface> graphics_surface_ptr;
 
 } // namespace nori
 
-#endif /* NORI_GRAPHICS_SURFACE_FWD_H_ */
+#endif // NORI_GRAPHICS_SURFACE_FWD_H_

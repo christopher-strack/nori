@@ -33,4 +33,4 @@ private:
 
 } // namespace nori
 
-#endif /* NORI_RENDERER_H_ */
+#endif // NORI_RENDERER_H_

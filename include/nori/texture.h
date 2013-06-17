@@ -28,4 +28,4 @@ private:
 
 } // namespace nori
 
-#endif /* NORI_TEXTURE_H_ */
+#endif // NORI_TEXTURE_H_

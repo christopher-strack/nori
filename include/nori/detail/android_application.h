@@ -44,4 +44,4 @@ private:
 } // namespace nori
 
 
-#endif /* NORI_ANDROID_APPLICATION_H_ */
+#endif // NORI_ANDROID_APPLICATION_H_

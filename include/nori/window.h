@@ -19,4 +19,4 @@ typedef detail::null_window window;
 
 } // namespace nori
 
-#endif /* NORI_WINDOW_H_ */
+#endif // NORI_WINDOW_H_

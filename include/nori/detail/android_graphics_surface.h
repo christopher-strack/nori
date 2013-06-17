@@ -33,4 +33,4 @@ private:
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_ANDROID_GRAPHICS_SURFACE_H_ */
+#endif // NORI_ANDROID_GRAPHICS_SURFACE_H_

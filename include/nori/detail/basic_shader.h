@@ -36,4 +36,4 @@ const char basic_fragment[] =
 } // namespace detail
 } // namespace nori
 
-#endif /* NORI_BASIC_SHADER_H_ */
+#endif // NORI_BASIC_SHADER_H_
