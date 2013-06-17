@@ -49,4 +49,4 @@ image::image_buffer image::data() const {
     return _data;
 }
 
-} /* namespace nori */
+} // namespace nori

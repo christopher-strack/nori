@@ -126,4 +126,4 @@ std::string shader_program::_get_program_infos(GLuint program_id) {
     return "";
 }
 
-} /* namespace nori */
+} // namespace nori

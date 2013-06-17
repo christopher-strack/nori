@@ -25,7 +25,7 @@ private:
     boost::shared_ptr<nori::window> _window;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_WIN_APPLICATION_H_ */

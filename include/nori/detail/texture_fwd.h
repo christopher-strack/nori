@@ -9,6 +9,6 @@ namespace nori {
 class texture;
 typedef boost::shared_ptr<texture> texture_ptr;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_TEXTURE_FWD_H_ */

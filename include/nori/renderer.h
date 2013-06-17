@@ -31,6 +31,6 @@ private:
     shader_program_ptr _program;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_RENDERER_H_ */

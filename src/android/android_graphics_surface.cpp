@@ -79,5 +79,5 @@ void android_graphics_surface::swap() {
     ::eglSwapBuffers(_display, _surface);
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

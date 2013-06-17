@@ -32,7 +32,7 @@ private:
     nori::size _size;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_WIN_GRAPHICS_SURFACE_H_ */

@@ -106,6 +106,6 @@ private:
     static GLuint _active_program_id;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_SHADER_PROGRAM_H_ */

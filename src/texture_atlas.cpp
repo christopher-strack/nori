@@ -37,4 +37,4 @@ int texture_atlas::max_atlas_size() {
     return std::min<int>(2048, max_size());
 }
 
-} /* namespace nori */
+} // namespace nori

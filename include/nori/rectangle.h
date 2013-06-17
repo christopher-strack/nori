@@ -53,6 +53,6 @@ public:
 typedef rectangle_t<int> rectangle;
 typedef rectangle_t<float> rectangle_f;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_RECTANGLE_H_ */

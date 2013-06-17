@@ -16,6 +16,6 @@ typedef detail::win_application application;
 typedef detail::android_application application;
 #endif
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_APPLICATION_H_ */

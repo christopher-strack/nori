@@ -9,6 +9,6 @@ namespace nori {
 class renderer;
 typedef boost::shared_ptr<renderer> renderer_ptr;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_RENDERER_FWD_H_ */

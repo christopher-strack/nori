@@ -43,5 +43,5 @@ void output_printer::OnTestEnd(const ::testing::TestInfo& test_info) {
 }
 
 
-} /* namespace testing */
-} /* namespace nori */
+} // namespace testing
+} // namespace nori

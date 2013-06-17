@@ -24,7 +24,7 @@ private:
     std::fstream _filestream;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_STL_FILE_H_ */

@@ -33,7 +33,7 @@ const char basic_fragment[] =
     "} \n";
 
 } /* namespace shader_source */
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_BASIC_SHADER_H_ */

@@ -18,7 +18,7 @@ const char fragment_shader_source[] =
 "    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); \n"
 "} \n";
 
-} /* namespace testing */
-} /* namespace nori */
+} // namespace testing
+} // namespace nori
 
 #endif /* NORI_TEST_SHADERS_H_ */

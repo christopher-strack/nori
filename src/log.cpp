@@ -27,4 +27,4 @@ void log_error(const char* message, ...) {
     va_end(args);
 }
 
-} /* namespace nori */
+} // namespace nori

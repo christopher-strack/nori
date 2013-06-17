@@ -28,7 +28,7 @@ private:
     nori::size _size;
 };
 
-} /* namespace testing */
-} /* namespace nori */
+} // namespace testing
+} // namespace nori
 
 #endif /* NORI_IMAGE_MOCK_H_ */

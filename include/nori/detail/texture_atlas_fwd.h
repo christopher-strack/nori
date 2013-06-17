@@ -9,6 +9,6 @@ namespace nori {
 class texture_atlas;
 typedef boost::shared_ptr<texture_atlas> texture_atlas_ptr;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_TEXTURE_ATLAS_FWD_H_ */

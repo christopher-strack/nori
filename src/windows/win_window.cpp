@@ -10,7 +10,7 @@ namespace {
 
 std::string _create_unique_class_name();
 
-} /* anonymous namespace */
+} // anonymous namespace
 
 
 namespace nori {
@@ -162,8 +162,8 @@ LRESULT CALLBACK win_window::_window_proc(
     return ::DefWindowProc(hwnd, message, wparam, lparam);
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 
 namespace {
@@ -177,4 +177,4 @@ std::string _create_unique_class_name() {
     return stream.str();
 }
 
-} /* anonymous namespace */
+} // anonymous namespace

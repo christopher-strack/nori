@@ -25,6 +25,6 @@ private:
     detail::rectangle_packer _packer;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_TEXTURE_ATLAS_H_ */

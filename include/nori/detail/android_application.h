@@ -40,8 +40,8 @@ private:
     android_app* _android_app;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 
 #endif /* NORI_ANDROID_APPLICATION_H_ */

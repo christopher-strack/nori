@@ -17,6 +17,6 @@ typedef detail::win_window window;
 typedef detail::null_window window;
 #endif
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_WINDOW_H_ */

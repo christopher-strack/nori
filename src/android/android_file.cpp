@@ -68,5 +68,5 @@ unsigned int android_file::read(char* buffer, unsigned int size) {
     return bytes_read;
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

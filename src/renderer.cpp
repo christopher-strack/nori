@@ -57,4 +57,4 @@ void renderer::render(
     ::glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-} /* namespace nori */
+} // namespace nori

@@ -101,5 +101,5 @@ void win_graphics_surface::_set_pixel_format(int bits) {
     }
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

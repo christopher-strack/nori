@@ -48,5 +48,5 @@ graphics_surface_ptr null_window::graphics_surface() {
 void null_window::dispatch_messages() {
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

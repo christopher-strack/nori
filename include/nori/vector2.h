@@ -64,7 +64,7 @@ bool nori::vector2<T>::operator!=(const vector2<T>& other) const {
     return !operator==(other);
 }
 
-} /* namespace nori */
+} // namespace nori
 
 
 #endif /* NORI_VECTOR2_H_ */

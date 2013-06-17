@@ -30,5 +30,5 @@ void log(log_priority priority, const char* message, va_list args) {
     ::OutputDebugStringA(str.str().c_str());
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

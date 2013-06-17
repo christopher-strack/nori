@@ -16,6 +16,6 @@ public:
     float elements[16];
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_MATRIX4_H_ */

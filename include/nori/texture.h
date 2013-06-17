@@ -26,6 +26,6 @@ private:
     GLuint _texture_id;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_TEXTURE_H_ */

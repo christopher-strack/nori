@@ -74,5 +74,5 @@ const rectangle& rectangle_packer::node::region() const {
     return _region;
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

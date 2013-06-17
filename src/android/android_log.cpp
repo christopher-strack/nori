@@ -9,7 +9,7 @@ namespace {
 
 android_LogPriority convert_to_android_priority(nori::detail::log_priority priority);
 
-} /* anonymous namespace */
+} // anonymous namespace
 
 
 namespace nori {
@@ -28,8 +28,8 @@ void log(log_priority priority, const char* message, va_list args) {
     __android_log_vprint(convert_to_android_priority(priority), "nori", message, args);
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 
 namespace {
@@ -52,4 +52,4 @@ android_LogPriority convert_to_android_priority(nori::detail::log_priority prior
     return android_priority;
 }
 
-} /* anonymous namespace */
+} // anonymous namespace

@@ -57,7 +57,7 @@ private:
     graphics_surface_ptr _graphics_surface;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_WIN_WINDOW_ */

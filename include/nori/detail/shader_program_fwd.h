@@ -9,6 +9,6 @@ namespace nori {
 class shader_program;
 typedef boost::shared_ptr<shader_program> shader_program_ptr;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_SHADER_PROGRAM_FWD_H_ */

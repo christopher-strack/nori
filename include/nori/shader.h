@@ -38,6 +38,6 @@ public:
     fragment_shader(const char* source);
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_SHADER_H_ */

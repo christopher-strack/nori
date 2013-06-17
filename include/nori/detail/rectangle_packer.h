@@ -34,7 +34,7 @@ private:
     node _root;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_RECTANGLE_PACKER_H_ */

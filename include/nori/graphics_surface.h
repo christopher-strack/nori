@@ -15,6 +15,6 @@ public:
     virtual void swap() = 0;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_GRAPHICS_SURFACE_H_ */

@@ -65,4 +65,4 @@ fragment_shader::fragment_shader(const char* source)
 {
 }
 
-} /* namespace nori */
+} // namespace nori

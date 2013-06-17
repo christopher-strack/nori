@@ -7,6 +7,6 @@ void log_info(const char* message, ...);
 void log_warning(const char* message, ...);
 void log_error(const char* message, ...);
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_LOG_H_ */

@@ -30,7 +30,7 @@ private:
     EGLContext _context;
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_ANDROID_GRAPHICS_SURFACE_H_ */

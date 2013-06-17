@@ -26,6 +26,6 @@ private:
     nori::size _size;
 };
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_IMAGE_H_ */

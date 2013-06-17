@@ -16,7 +16,7 @@ protected:
     virtual void OnTestEnd(const ::testing::TestInfo& testInfo);
 };
 
-} /* namespace testing */
-} /* namespace nori */
+} // namespace testing
+} // namespace nori
 
 #endif /* NORI_OUTPUT_PRINTER_H_ */

@@ -42,5 +42,5 @@ unsigned int stl_file::read(char* buffer, unsigned int size) {
     return static_cast<unsigned int>(_filestream.gcount());
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

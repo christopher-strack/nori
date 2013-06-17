@@ -53,4 +53,4 @@ void texture::bind() {
     ::glBindTexture(GL_TEXTURE_2D, _texture_id);
 }
 
-} /* namespace nori */
+} // namespace nori

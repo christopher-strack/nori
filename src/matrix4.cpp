@@ -28,4 +28,4 @@ matrix4 matrix4::make_orthogonal(const size& size) {
     return matrix4(elements);
 }
 
-} /* namespace nori */
+} // namespace nori

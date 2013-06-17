@@ -9,6 +9,6 @@ namespace nori {
 class image;
 typedef boost::shared_ptr<image> image_ptr;
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_IMAGE_FWD_H_ */

@@ -17,6 +17,6 @@ typedef detail::stl_file file;
 typedef detail::android_file file;
 #endif
 
-} /* namespace nori */
+} // namespace nori
 
 #endif /* NORI_FILE_H_ */

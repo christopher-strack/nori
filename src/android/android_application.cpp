@@ -92,5 +92,5 @@ int32_t android_application::_on_android_input_proxy(
     return 0;
 }
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori

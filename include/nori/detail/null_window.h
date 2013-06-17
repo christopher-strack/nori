@@ -33,7 +33,7 @@ public:
     void dispatch_messages();
 };
 
-} /* namespace detail */
-} /* namespace nori */
+} // namespace detail
+} // namespace nori
 
 #endif /* NORI_NULL_WINDOW_H_ */
