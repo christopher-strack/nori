@@ -16,6 +16,11 @@ public:
     bool operator==(const vector2<T>& other) const;
     bool operator!=(const vector2<T>& other) const;
 
+    template<typename U>
+    operator vector2<U>() {
+        return vector2<U>(static_cast<U>(x), static_cast<U>(y));
+    }
+
     vector2<T> operator*(T scalar) {
         return vector2<T>(x * scalar, y * scalar);
     }

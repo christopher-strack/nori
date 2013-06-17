@@ -44,6 +44,11 @@ TEST(rectangle, size) {
     ASSERT_EQ(r.size(), nori::size(30, 40));
 }
 
+TEST(rectangle, cast) {
+    nori::rectangle_t<int> r1;
+    nori::rectangle_t<float> r2 = r1;
+}
+
 TEST(rectangle, inside_true_if_equal) {
     nori::rectangle r1(nori::point(10, 20), nori::size(30, 40));
     nori::rectangle r2(nori::point(10, 20), nori::size(30, 40));

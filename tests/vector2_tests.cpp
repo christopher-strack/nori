@@ -37,6 +37,11 @@ TEST(vector2, compare) {
     ASSERT_TRUE(v2 == v3);
 }
 
+TEST(vector2, cast) {
+    nori::vector2<int> v1;
+    nori::vector2<float> v2 = v1;
+}
+
 TEST(vector2, multiply) {
     nori::vector2<float> v(10, 20);
     ASSERT_EQ(v * 0.5f, nori::vector2<float>(5, 10));

@@ -23,11 +23,10 @@ bool texture_atlas::add(const image& image, rectangle_f& coords) {
             GL_TEXTURE_2D, 0,
             region.left, region.top, region.size().x, region.size().y,
             GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&image.data()[0]);
-        float size_x = (float)size().x;
-        float size_y = (float)size().y;
+        size_f size = texture::size();
         coords = rectangle_f(
-            region.left / size_x, region.top / size_y,
-            region.right / size_x, region.bottom / size_y);
+            region.left / size.x, region.top / size.y,
+            region.right / size.x, region.bottom / size.y);
         return true;
     }
     return false;
