@@ -34,17 +34,19 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
 
 if (WIN32)
     find_package(OpenGl REQUIRED)
-    set(GLEW_ROOT CACHE PATH "Path to GLEW")
-    find_package(Glew REQUIRED)
-
     add_definitions(/D_SCL_SECURE_NO_WARNINGS)
+
+    if (BUILD_SHARED_LIBS)
+        add_definitions(/DGLEW_STATIC)
+    else()
+        add_definitions(/DGLEW_BUILD)
+    endif()
 endif()
 
 find_package(Boost REQUIRED)
 
 include_directories(
     include
-    ${GLEW_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${Android_INCLUDE_DIRS})
 
@@ -58,14 +60,19 @@ add_precompiled_header(
     "${nori_sources}")
 
 set(lodepng_sources src/lodepng/lodepng.cpp)
+set(glew_sources src/glew/*.c)
 
-add_library(nori ${nori_sources} ${nori_includes} ${nori_detail} ${lodepng_sources})
+add_library(nori
+    ${nori_sources} ${nori_includes} ${nori_detail}
+    ${lodepng_sources} ${glew_sources})
+
 target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${Android_LIBRARIES})
 
 source_group(src FILES ${nori_sources})
 source_group(include FILES ${nori_includes})
 source_group(detail FILES ${nori_detail})
 source_group(lodepng FILES ${lodepng_sources})
+source_group(glew FILES ${glew_sources})
 
 # nori tests
 if (NORI_BUILD_TESTS)
