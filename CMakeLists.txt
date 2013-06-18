@@ -40,7 +40,6 @@ if (WIN32)
     add_definitions(/D_SCL_SECURE_NO_WARNINGS)
 endif()
 
-set(BOOST_ROOT CACHE PATH "Path to boost")
 find_package(Boost REQUIRED)
 
 include_directories(
@@ -49,17 +48,24 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${Android_INCLUDE_DIRS})
 
-file(GLOB nori_sources src/*.cpp src/${nori_platform_folder}/*.cpp)
-file(GLOB nori_includes include/nori/*.h include/nori/detail/*.h)
+file(GLOB nori_sources src/nori/*.cpp src/nori/${nori_platform_folder}/*.cpp)
+file(GLOB nori_includes include/nori/*.h)
+file(GLOB nori_detail include/nori/detail/*.h)
 
 add_precompiled_header(
     "nori/detail/precompiled.h"
-    src/precompiled.cpp
+    "src/nori/precompiled.cpp"
     "${nori_sources}")
 
-add_library(nori ${nori_sources} ${nori_includes})
+set(lodepng_sources src/lodepng/lodepng.cpp)
+
+add_library(nori ${nori_sources} ${nori_includes} ${nori_detail} ${lodepng_sources})
 target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${Android_LIBRARIES})
 
+source_group(src FILES ${nori_sources})
+source_group(include FILES ${nori_includes})
+source_group(detail FILES ${nori_detail})
+source_group(lodepng FILES ${lodepng_sources})
 
 # nori tests
 if (NORI_BUILD_TESTS)
