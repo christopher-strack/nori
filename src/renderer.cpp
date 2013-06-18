@@ -22,6 +22,8 @@ renderer::renderer(graphics_surface_ptr graphics_surface)
     _program->activate();
     size surface_size = graphics_surface->size();
     _program->uniforms["ortho_matrix"] = matrix4::make_orthogonal(surface_size);
+
+    _enable_alpha_blending();
 }
 
 void renderer::render(texture& texture, const point_f& position, const size_f& size) {
@@ -55,6 +57,11 @@ void renderer::render(
     _program->attributes["uv"] = uvs;
 
     ::glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void renderer::_enable_alpha_blending() {
+    ::glEnable(GL_BLEND);
+    ::glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 } // namespace nori

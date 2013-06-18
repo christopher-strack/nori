@@ -27,6 +27,8 @@ public:
         const size_f& size);
 
 private:
+    void _enable_alpha_blending();
+
     graphics_surface_ptr _graphics_surface;
     shader_program_ptr _program;
 };
