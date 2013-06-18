@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/stl_file.h"
 
 

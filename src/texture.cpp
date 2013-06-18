@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/texture.h"
 #include "nori/image.h"
 

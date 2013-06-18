@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/log_priority.h"
 
 

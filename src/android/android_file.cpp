@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/android_file.h"
 #include "nori/log.h"
 

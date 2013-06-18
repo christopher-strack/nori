@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/win_graphics_surface.h"
 #include "nori/detail/win_window.h"
 #include "nori/detail/opengl_fwd.h"

@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/android_graphics_surface.h"
 
 #include <android/native_window.h>

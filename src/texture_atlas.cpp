@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/texture_atlas.h"
 #include "nori/image.h"
 

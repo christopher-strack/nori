@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/image.h"
 #include "nori/file.h"
 #include "nori/log.h"

@@ -7,6 +7,8 @@ project(nori)
 option(NORI_BUILD_TESTS "Build nori tests" ON)
 option(NORI_BUILD_SAMPLES "Build nori samples" ON)
 
+include("cmake/precompiled_header.cmake")
+
 
 # nori library
 if (WIN32)
@@ -49,6 +51,12 @@ include_directories(
 
 file(GLOB nori_sources src/*.cpp src/${nori_platform_folder}/*.cpp)
 file(GLOB nori_includes include/nori/*.h include/nori/detail/*.h)
+
+add_precompiled_header(
+    "nori/detail/precompiled.h"
+    src/precompiled.cpp
+    "${nori_sources}")
+
 add_library(nori ${nori_sources} ${nori_includes})
 target_link_libraries(nori ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${Android_LIBRARIES})
 

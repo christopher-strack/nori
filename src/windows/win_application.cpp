@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/win_application.h"
 #include "nori/graphics_surface.h"
 #include "nori/renderer.h"

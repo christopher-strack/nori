@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/null_window.h"
 
 #include <stdexcept>

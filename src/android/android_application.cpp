@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/android_application.h"
 #include "nori/detail/android_graphics_surface.h"
 #include "nori/detail/android_file.h"

@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/detail/rectangle_packer.h"
 
 #include <boost/make_shared.hpp>

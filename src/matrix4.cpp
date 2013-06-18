@@ -1,3 +1,4 @@
+#include "nori/detail/precompiled.h"
 #include "nori/matrix4.h"
 
 #include <algorithm>
