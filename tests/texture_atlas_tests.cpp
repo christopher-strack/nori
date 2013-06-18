@@ -1,3 +1,4 @@
+#include "precompiled.h"
 #include "image_mock.h"
 
 #include <gtest/gtest.h>

@@ -1,3 +1,5 @@
+#include "precompiled.h"
+
 #if defined(WIN32)
 
 #include <gtest/gtest.h>

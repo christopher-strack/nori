@@ -1,3 +1,4 @@
+#include "precompiled.h"
 #include "test_shaders.h"
 
 #include <gtest/gtest.h>

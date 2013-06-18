@@ -1,3 +1,4 @@
+#include "precompiled.h"
 #include <gtest/gtest.h>
 #include <nori/texture.h>
 #include <nori/image.h>

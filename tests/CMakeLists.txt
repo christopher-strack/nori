@@ -11,6 +11,11 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 file(GLOB nori_test_sources *.cpp)
 
+add_precompiled_header(
+    "precompiled.h"
+    precompiled.cpp
+    "${nori_test_sources}")
+
 if (WIN32)
     add_executable(nori_tests ${nori_test_sources})
 elseif (ANDROID)

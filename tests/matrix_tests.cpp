@@ -1,3 +1,4 @@
+#include "precompiled.h"
 #include <gtest/gtest.h>
 #include <nori/matrix4.h>
 

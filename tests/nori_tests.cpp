@@ -1,3 +1,4 @@
+#include "precompiled.h"
 #include "output_printer.h"
 
 #include "nori/application.h"
