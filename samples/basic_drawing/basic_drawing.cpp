@@ -7,15 +7,14 @@
 #include <nori/texture_atlas.h>
 #include <nori/rectangle.h>
 
-#include <boost/make_shared.hpp>
-
+#include <memory>
 #include <stdexcept>
 
 
 class basic_drawing_app : public nori::application {
 public:
     virtual bool on_initialized() {
-        _texture = boost::make_shared<nori::texture_atlas>();
+        _texture = std::make_shared<nori::texture_atlas>();
         _texture->add(nori::image("assets/megaman.png"), _coords);
         return true;
     }

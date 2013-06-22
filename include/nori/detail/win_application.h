@@ -5,7 +5,7 @@
 #include "nori/application_arguments.h"
 #include "nori/detail/renderer_fwd.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 namespace nori {
@@ -22,7 +22,7 @@ protected:
     virtual void render(renderer& renderer) {}
 
 private:
-    boost::shared_ptr<nori::window> _window;
+    std::shared_ptr<nori::window> _window;
 };
 
 } // namespace detail

@@ -4,7 +4,7 @@
 #include "nori/rectangle.h"
 #include "nori/vector2.h"
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 namespace nori {
@@ -24,7 +24,7 @@ private:
         const rectangle& region() const;
 
     private:
-        typedef boost::shared_ptr<node> node_ptr;
+        typedef std::shared_ptr<node> node_ptr;
         node_ptr _left;
         node_ptr _right;
         rectangle _region;

@@ -1,7 +1,7 @@
 #include "nori/detail/precompiled.h"
 #include "nori/detail/rectangle_packer.h"
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 
 namespace nori {
@@ -52,17 +52,17 @@ rectangle_packer::node* rectangle_packer::node::add(const size& size) {
         }
 
         if (_region.size().x - size.x > _region.size().y - size.y) {
-            _left = boost::make_shared<node>(rectangle(
+            _left = std::make_shared<node>(rectangle(
                 _region.left, _region.top,
                 _region.left + size.x, _region.bottom));
-            _right = boost::make_shared<node>(rectangle(
+            _right = std::make_shared<node>(rectangle(
                 _region.left + size.x, _region.top,
                 _region.right, _region.bottom));
         } else {
-            _left = boost::make_shared<node>(rectangle(
+            _left = std::make_shared<node>(rectangle(
                 _region.left, _region.top,
                 _region.right, _region.top + size.y));
-            _right = boost::make_shared<node>(rectangle(
+            _right = std::make_shared<node>(rectangle(
                 _region.left, _region.top + size.y,
                 _region.right, _region.bottom));
         }

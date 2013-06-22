@@ -7,8 +7,9 @@
 #include "nori/matrix4.h"
 #include "nori/rectangle.h"
 
+#include <memory>
+
 #include <boost/assign/std/vector.hpp>
-#include <boost/make_shared.hpp>
 
 
 namespace nori {
@@ -16,7 +17,7 @@ namespace nori {
 renderer::renderer(graphics_surface_ptr graphics_surface)
     : _graphics_surface(graphics_surface)
 {
-    _program = boost::make_shared<shader_program>(
+    _program = std::make_shared<shader_program>(
         vertex_shader(detail::shader_source::basic_vertex),
         fragment_shader(detail::shader_source::basic_fragment));
 

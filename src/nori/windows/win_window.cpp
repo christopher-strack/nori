@@ -2,7 +2,7 @@
 #include "nori/detail/win_window.h"
 #include "nori/detail/win_graphics_surface.h"
 
-#include <boost/make_shared.hpp>
+#include <memory>
 #include <stdexcept>
 #include <sstream>
 
@@ -88,7 +88,7 @@ bool win_window::focused() const {
 
 graphics_surface_ptr win_window::graphics_surface() {
     if (_graphics_surface == 0) {
-        _graphics_surface = boost::make_shared<win_graphics_surface>(*this);
+        _graphics_surface = std::make_shared<win_graphics_surface>(*this);
     }
 
     return _graphics_surface;

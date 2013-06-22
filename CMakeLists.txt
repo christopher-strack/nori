@@ -30,6 +30,8 @@ elseif (ANDROID)
 
     set(Android_LIBRARIES native_app_glue android log EGL GLESv2)
     set(Android_INCLUDE_DIRS "${ANDROID_NDK}/sources/android/native_app_glue")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
@@ -43,6 +45,8 @@ if (WIN32)
     else()
         add_definitions(/DGLEW_BUILD)
     endif()
+
+    set(glew_sources src/glew/*.c)
 endif()
 
 find_package(Boost REQUIRED)
@@ -62,7 +66,6 @@ add_precompiled_header(
     "${nori_sources}")
 
 set(lodepng_sources src/lodepng/lodepng.cpp)
-set(glew_sources src/glew/*.c)
 
 add_library(nori
     ${nori_sources} ${nori_includes} ${nori_detail}

@@ -3,14 +3,14 @@
 #include "nori/graphics_surface.h"
 #include "nori/renderer.h"
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 
 namespace nori {
 namespace detail {
 
 void win_application::run(const nori::application_arguments& arguments) {
-    _window = boost::make_shared<window>();
+    _window = std::make_shared<window>();
     on_window_created(*_window);
     graphics_surface_ptr surface = _window->graphics_surface();
     renderer renderer(surface);
