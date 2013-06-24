@@ -16,15 +16,18 @@ class renderer {
 public:
     renderer(graphics_surface_ptr graphics_surface);
 
-    void render(
+    virtual void render(
         texture& texture,
         const point_f& position,
         const size_f& size);
-    void render(
+    virtual void render(
         texture& texture,
         const rectangle_f& texture_coords,
         const point_f& position,
         const size_f& size);
+
+protected:
+    renderer();
 
 private:
     void _enable_alpha_blending();

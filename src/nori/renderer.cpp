@@ -28,6 +28,10 @@ renderer::renderer(graphics_surface_ptr graphics_surface)
     _enable_alpha_blending();
 }
 
+renderer::renderer() {
+
+}
+
 void renderer::render(texture& texture, const point_f& position, const size_f& size) {
     rectangle_f coords(point_f(0.0f, 0.0f), point_f(1.0f, 1.0f));
     render(texture, coords, position, size);

@@ -1,11 +1,9 @@
 #include <nori/main.h>
 #include <nori/application.h>
-#include <nori/renderer.h>
 #include <nori/window.h>
 #include <nori/log.h>
-#include <nori/image.h>
-#include <nori/texture_atlas.h>
-#include <nori/rectangle.h>
+#include <nori/scene.h>
+#include <nori/sprite.h>
 
 #include <memory>
 #include <stdexcept>
@@ -14,8 +12,7 @@
 class basic_drawing_app : public nori::application {
 public:
     virtual bool on_initialized() {
-        _texture = std::make_shared<nori::texture_atlas>();
-        _texture->add(nori::image("assets/megaman.png"), _coords);
+        _scene.add_sprite(nori::make_sprite("assets/megaman.png"));
         return true;
     }
 
@@ -25,14 +22,11 @@ public:
     }
 
     virtual void render(nori::renderer& renderer) {
-        renderer.render(
-            *_texture, _coords,
-            nori::point_f(100, 50), nori::size_f(256, 256));
+        _scene.render(renderer);
     }
 
 private:
-    nori::rectangle_f _coords;
-    nori::texture_atlas_ptr _texture;
+    nori::scene _scene;
 };
 
 
