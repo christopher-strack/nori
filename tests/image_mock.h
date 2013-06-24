@@ -7,9 +7,9 @@
 namespace nori {
 namespace testing {
 
-class mock_image : public nori::image {
+class image_mock : public nori::image {
 public:
-    mock_image(const nori::size& size)
+    image_mock(const nori::size& size)
         : _size(size)
     {
         _data.resize(size.x * size.y * 4);
