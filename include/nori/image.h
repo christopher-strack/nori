@@ -13,7 +13,7 @@ class image {
 public:
     typedef std::vector<unsigned char> image_buffer;
 
-    image(const char* filename);
+    image(const std::string& filename);
 
     virtual nori::size size() const;
     virtual image_buffer data() const;

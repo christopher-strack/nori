@@ -11,8 +11,8 @@
 
 namespace nori {
 
-image::image(const char* filename) {
-    nori::file file(filename);
+image::image(const std::string& filename) {
+    nori::file file(filename.c_str());
     if (file.is_open()) {
         unsigned int file_size = file.size();
         image_buffer file_buffer(file_size);
