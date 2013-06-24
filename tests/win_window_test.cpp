@@ -3,7 +3,7 @@
 #if defined(WIN32)
 
 #include <nori/window.h>
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 
 TEST(window, construct) {

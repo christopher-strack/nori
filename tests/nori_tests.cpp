@@ -5,7 +5,7 @@
 #include "nori/main.h"
 #include "nori/log.h"
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include <stdexcept>
 

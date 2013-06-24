@@ -1,7 +1,7 @@
 #ifndef NORI_OUTPUT_PRINTER_H_
 #define NORI_OUTPUT_PRINTER_H_
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 
 namespace nori {

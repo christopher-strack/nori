@@ -1,7 +1,7 @@
 #include "precompiled.h"
 #include "test_shaders.h"
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <nori/shader.h>
 #include <nori/shader_program.h>
 #include <nori/matrix4.h>

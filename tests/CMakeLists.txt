@@ -4,10 +4,10 @@ if (ANDROID)
     set(LIBRARY_OUTPUT_PATH "${nori_tests_SOURCE_DIR}/libs/${ANDROID_NDK_ABI_NAME}")
 endif()
 
-set(GTEST_ROOT CACHE PATH "Path to gtest")
-find_package(GTest REQUIRED)
+set(GMOCK_ROOT CACHE PATH "Path to gmock")
+find_package(GMock REQUIRED)
 
-include_directories(${GTEST_INCLUDE_DIRS})
+include_directories(${GMOCK_INCLUDE_DIRS})
 
 file(GLOB nori_test_sources *.cpp)
 
@@ -22,4 +22,4 @@ elseif (ANDROID)
     add_library(nori_tests SHARED ${nori_test_sources})
 endif()
 
-target_link_libraries(nori_tests nori ${GTEST_LIBRARIES})
+target_link_libraries(nori_tests nori ${GMOCK_LIBRARIES})

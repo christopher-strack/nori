@@ -2,7 +2,7 @@
 
 #if defined(WIN32)
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <nori/graphics_surface.h>
 #include <nori/window.h>
 

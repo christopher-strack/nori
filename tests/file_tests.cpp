@@ -1,5 +1,5 @@
 #include "precompiled.h"
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <nori/file.h>
 
 #include <string>

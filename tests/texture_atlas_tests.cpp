@@ -1,7 +1,7 @@
 #include "precompiled.h"
 #include "image_mock.h"
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <nori/texture_atlas.h>
 
 #include <stdexcept>
