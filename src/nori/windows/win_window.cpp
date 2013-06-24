@@ -64,12 +64,17 @@ bool win_window::closed() const {
 void win_window::set_size(const nori::size& size) {
     RECT rect;
     ::GetWindowRect(_handle, &rect);
-    ::MoveWindow(_handle, rect.left, rect.top, size.x, size.y, FALSE);
+    rect.right = rect.left + size.x;
+    rect.bottom = rect.top + size.y;
+    ::AdjustWindowRect(&rect, _style, FALSE);
+    const int width = rect.right - rect.left;
+    const int height = rect.bottom - rect.top;
+    ::MoveWindow(_handle, rect.left, rect.top, width, height, FALSE);
 }
 
 size win_window::size() const {
     RECT rect;
-    ::GetWindowRect(_handle, &rect);
+    ::GetClientRect(_handle, &rect);
     return nori::size(rect.right - rect.left, rect.bottom - rect.top);
 }
 
