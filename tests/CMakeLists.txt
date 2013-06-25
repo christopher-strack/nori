@@ -22,4 +22,4 @@ elseif (ANDROID)
     add_library(nori_tests SHARED ${nori_test_sources})
 endif()
 
-target_link_libraries(nori_tests nori ${GMOCK_LIBRARIES})
+target_link_libraries(nori_tests nori ${GMOCK_LIBRARIES} ${GTEST_LIBRARIES})
