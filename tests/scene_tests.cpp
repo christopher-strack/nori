@@ -48,7 +48,8 @@ TEST(scene, set_node_size) {
 
     sprite_node->set_size(nori::size_f(100, 200));
     ASSERT_EQ(sprite_node->size(), nori::size_f(100, 200));
-    EXPECT_CALL(renderer, render(_, _, _, Eq(ByRef(nori::size_f(100, 200))))).Times(1);
+    nori::size_f expected_size(100, 200);
+    EXPECT_CALL(renderer, render(_, _, _, Eq(ByRef(expected_size)))).Times(1);
     scene.render(renderer);
 }
 
@@ -67,7 +68,8 @@ TEST(scene, set_node_position) {
 
     sprite_node->set_position(nori::point_f(100, 200));
     ASSERT_EQ(sprite_node->position(), nori::point_f(100, 200));
-    EXPECT_CALL(renderer, render(_, _, Eq(ByRef(nori::point_f(100, 200))), _)).Times(1);
+    nori::point_f expected_pos(100, 200);
+    EXPECT_CALL(renderer, render(_, _, Eq(ByRef(expected_pos)), _)).Times(1);
     scene.render(renderer);
 }
 

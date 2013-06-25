@@ -54,7 +54,8 @@ sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
         image sprite_image(sprite->image_file());
         desc.size = sprite_image.size();
         desc.texture = std::make_shared<texture_atlas>();
-        desc.texture->add(sprite_image, desc.texture_coords);
+        bool added = false;
+        std::tie(added, desc.texture_coords) = desc.texture->add(sprite_image);
         _sprites.insert(sprite_map::value_type(sprite, desc));
     }
     else {
