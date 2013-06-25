@@ -8,6 +8,7 @@
 #include "nori/detail/texture_atlas_fwd.h"
 
 #include <vector>
+#include <map>
 
 
 namespace nori {
@@ -46,7 +47,16 @@ public:
     void render(renderer& renderer);
 
 private:
+    struct sprite_description {
+        texture_atlas_ptr texture;
+        rectangle_f texture_coords;
+        size_f size;
+    };
+
+    typedef std::map<sprite_ptr, sprite_description> sprite_map;
     typedef std::vector<sprite_node_ptr> sprite_node_array;
+
+    sprite_map _sprites;
     sprite_node_array _sprite_nodes;
     texture_atlas_ptr _texture_atlas;
 };

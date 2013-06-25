@@ -70,3 +70,13 @@ TEST(scene, set_node_position) {
     EXPECT_CALL(renderer, render(_, _, Eq(ByRef(nori::point_f(100, 200))), _)).Times(1);
     scene.render(renderer);
 }
+
+TEST(scene, map_sprite_to_same_texture_part) {
+    nori::scene scene;
+    auto sprite = nori::make_sprite("assets/sprite.png");
+
+    auto node1 = scene.add_sprite(sprite);
+    auto node2 = scene.add_sprite(sprite);
+    ASSERT_EQ(node1->texture(), node2->texture());
+    ASSERT_EQ(node1->texture_coords(), node2->texture_coords());
+}

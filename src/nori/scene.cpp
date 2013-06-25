@@ -47,14 +47,23 @@ scene::scene() {
 }
 
 sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
-    if (_texture_atlas == 0) {
-        _texture_atlas = std::make_shared<texture_atlas>();
+    sprite_description desc;
+
+    auto it = _sprites.find(sprite);
+    if (it == _sprites.end()) {
+        image sprite_image(sprite->image_file());
+        desc.size = sprite_image.size();
+        desc.texture = std::make_shared<texture_atlas>();
+        desc.texture->add(sprite_image, desc.texture_coords);
+        _sprites.insert(sprite_map::value_type(sprite, desc));
     }
-    image sprite_image(sprite->image_file());
-    rectangle_f texture_coords;
-    _texture_atlas->add(sprite_image, texture_coords);
-    auto node = std::make_shared<sprite_node>(_texture_atlas, texture_coords);
-    node->set_size(sprite_image.size());
+    else {
+        desc = it->second;
+    }
+
+    auto node = std::make_shared<sprite_node>(
+        desc.texture, desc.texture_coords);
+    node->set_size(desc.size);
     _sprite_nodes.push_back(node);
     return node;
 }
