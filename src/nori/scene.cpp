@@ -8,7 +8,10 @@
 #include <memory>
 
 #include <boost/range/algorithm_ext/erase.hpp>
+#include <boost/range/algorithm/find_if.hpp>
 #include <boost/range/algorithm/find.hpp>
+
+using std::tie;
 
 
 namespace nori {
@@ -34,12 +37,8 @@ const point_f& sprite_node::position() const {
     return _position;
 }
 
-texture_ptr sprite_node::texture() const {
-    return _texture;
-}
-
-rectangle_f sprite_node::texture_coords() const {
-    return _texture_coords;
+void sprite_node::render(renderer& renderer) {
+    renderer.render(*_texture, _texture_coords, _position, _size);
 }
 
 
@@ -51,11 +50,7 @@ sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
 
     auto it = _sprites.find(sprite);
     if (it == _sprites.end()) {
-        image sprite_image(sprite->image_file());
-        desc.size = sprite_image.size();
-        desc.texture = std::make_shared<texture_atlas>();
-        bool added = false;
-        std::tie(added, desc.texture_coords) = desc.texture->add(sprite_image);
+        desc = _create_sprite_description(sprite);
         _sprites.insert(sprite_map::value_type(sprite, desc));
     }
     else {
@@ -67,6 +62,40 @@ sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
     node->set_size(desc.size);
     _sprite_nodes.push_back(node);
     return node;
+}
+
+scene::sprite_description scene::_create_sprite_description(sprite_ptr sprite) {
+    sprite_description desc;
+    image img(sprite->image_file());
+    bool added = false;
+    tie(added, desc.texture, desc.texture_coords) = _try_fit_image(img);
+    if (!added) {
+        auto texture = std::make_shared<texture_atlas>();
+        tie(added, desc.texture_coords) = texture->add(img);
+        if (added) {
+            desc.texture = texture;
+            _textures.push_back(texture);
+        }
+        else {
+            throw std::runtime_error("Couldn't fit image into texture");
+        }
+    }
+    desc.size = img.size();
+    return desc;
+}
+
+std::tuple<bool, texture_atlas_ptr, rectangle_f> scene::_try_fit_image(
+    const image& image)
+{
+    texture_atlas_ptr texture;
+    rectangle_f coords;
+    auto it = boost::find_if(_textures, [&](texture_atlas_ptr t)->bool {
+        texture = t;
+        bool added = false;
+        tie(added, coords) = texture->add(image);
+        return added;
+    });
+    return std::make_tuple(it != _textures.end(), texture, coords);
 }
 
 bool scene::remove_sprite(sprite_node_ptr sprite_node) {
@@ -81,9 +110,7 @@ bool scene::remove_sprite(sprite_node_ptr sprite_node) {
 void scene::render(renderer& renderer) {
     for (auto it = _sprite_nodes.begin(); it != _sprite_nodes.end(); it++) {
         auto node = *it;
-        renderer.render(
-            *node->texture(), node->texture_coords(),
-            node->position(), node->size());
+        node->render(renderer);
     }
 }
 

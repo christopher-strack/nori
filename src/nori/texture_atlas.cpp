@@ -30,7 +30,7 @@ std::tuple<bool, rectangle_f> texture_atlas::add(const image& image) {
             region.right / size.x, region.bottom / size.y);
         return std::tuple<bool, rectangle_f>(true, coords);
     }
-    return std::tuple<bool, rectangle_f>(false, rectangle_f());
+    return std::make_tuple(false, rectangle_f());
 }
 
 int texture_atlas::max_atlas_size() {

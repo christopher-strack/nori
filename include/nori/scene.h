@@ -9,11 +9,13 @@
 
 #include <vector>
 #include <map>
+#include <tuple>
 
 
 namespace nori {
 
 class renderer;
+class image;
 
 
 class sprite_node {
@@ -26,8 +28,7 @@ public:
     void set_position(const point_f& position);
     const point_f& position() const;
 
-    texture_ptr texture() const;
-    rectangle_f texture_coords() const;
+    void render(renderer& renderer);
 
 private:
     size_f _size;
@@ -55,10 +56,15 @@ private:
 
     typedef std::map<sprite_ptr, sprite_description> sprite_map;
     typedef std::vector<sprite_node_ptr> sprite_node_array;
+    typedef std::vector<texture_atlas_ptr> texture_atlas_array;
+
+    sprite_description _create_sprite_description(sprite_ptr sprite);
+    std::tuple<bool, texture_atlas_ptr, rectangle_f> _try_fit_image(
+        const image& image);
 
     sprite_map _sprites;
     sprite_node_array _sprite_nodes;
-    texture_atlas_ptr _texture_atlas;
+    texture_atlas_array _textures;
 };
 
 } // namespace nori
