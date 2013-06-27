@@ -11,6 +11,8 @@
 #include <map>
 #include <tuple>
 
+#include <boost/optional.hpp>
+
 
 namespace nori {
 
@@ -59,8 +61,8 @@ private:
     typedef std::vector<texture_atlas_ptr> texture_atlas_array;
 
     sprite_description _create_sprite_description(sprite_ptr sprite);
-    std::tuple<bool, texture_atlas_ptr, rectangle_f> _try_fit_image(
-        const image& image);
+    boost::optional<std::tuple<texture_atlas_ptr, rectangle_f>>
+    _try_fit_image(const image& image);
 
     sprite_map _sprites;
     sprite_node_array _sprite_nodes;

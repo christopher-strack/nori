@@ -4,6 +4,8 @@
 #include "nori/rectangle.h"
 #include "nori/vector2.h"
 
+#include <boost/optional.hpp>
+
 #include <memory>
 
 
@@ -14,7 +16,7 @@ class rectangle_packer {
 public:
     rectangle_packer(const size& size);
 
-    bool pack(const size& rectangle_size, rectangle& packed_region);
+    boost::optional<rectangle> pack(const size& rectangle_size);
 
 private:
     class node {

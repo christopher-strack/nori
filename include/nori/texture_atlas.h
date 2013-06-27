@@ -7,7 +7,7 @@
 #include "nori/detail/rectangle_packer.h"
 #include "nori/detail/texture_atlas_fwd.h"
 
-#include <tuple>
+#include <boost/optional.hpp>
 
 
 namespace nori {
@@ -19,7 +19,7 @@ public:
     texture_atlas();
     texture_atlas(const nori::size& size);
 
-    std::tuple<bool, rectangle_f> add(const image& image);
+    boost::optional<rectangle_f> add(const image& image);
 
     static int max_atlas_size();
 

@@ -12,15 +12,13 @@ rectangle_packer::rectangle_packer(const size& size)
 {
 }
 
-bool rectangle_packer::pack(const size& rectangle_size, rectangle& packed_region) {
+boost::optional<rectangle> rectangle_packer::pack(const size& rectangle_size) {
     if (rectangle_size.x > 0 && rectangle_size.y > 0) {
-        node* node = _root.add(rectangle_size);
-        if (node) {
-            packed_region = node->region();
-            return true;
+        if (auto node = _root.add(rectangle_size)) {
+            return node->region();
         }
     }
-    return false;
+    return boost::optional<rectangle>();
 }
 
 

@@ -16,9 +16,30 @@ TEST(scene, construct) {
     nori::scene();
 }
 
-TEST(scene, add_sprite) {
+TEST(scene, add_sprite_returns_valid_node) {
     nori::scene scene;
-    auto sprite_node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+
+    auto node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    ASSERT_EQ(node->position(), nori::point_f(0, 0));
+    ASSERT_EQ(node->size(), nori::size_f(2, 2));
+}
+
+TEST(scene, add_equal_sprites_returns_equal_nodes) {
+    nori::scene scene;
+
+    auto node1 = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto node2 = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    ASSERT_EQ(node1->position(), node2->position());
+    ASSERT_EQ(node1->size(), node2->size());
+}
+
+TEST(scene, render) {
+    nori::testing::renderer_mock renderer;
+    nori::scene scene;
+    scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+
+    EXPECT_CALL(renderer, render(_, _, _, _)).Times(1);
+    scene.render(renderer);
 }
 
 TEST(scene, remove_sprite) {
@@ -30,14 +51,9 @@ TEST(scene, remove_sprite) {
 
     result = scene.remove_sprite(sprite_node);
     ASSERT_FALSE(result);
-}
 
-TEST(scene, render) {
     nori::testing::renderer_mock renderer;
-    nori::scene scene;
-    scene.add_sprite(nori::make_sprite("assets/sprite.png"));
-
-    EXPECT_CALL(renderer, render(_, _, _, _)).Times(1);
+    EXPECT_CALL(renderer, render(_, _, _, _)).Times(0);
     scene.render(renderer);
 }
 
@@ -51,13 +67,6 @@ TEST(scene, set_node_size) {
     nori::size_f expected_size(100, 200);
     EXPECT_CALL(renderer, render(_, _, _, Eq(ByRef(expected_size)))).Times(1);
     scene.render(renderer);
-}
-
-TEST(scene, default_node_size) {
-    nori::scene scene;
-    auto sprite_node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
-
-    ASSERT_EQ(sprite_node->size(), nori::size_f(2, 2));
 }
 
 TEST(scene, set_node_position) {

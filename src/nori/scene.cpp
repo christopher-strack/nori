@@ -57,8 +57,7 @@ sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
         desc = it->second;
     }
 
-    auto node = std::make_shared<sprite_node>(
-        desc.texture, desc.texture_coords);
+    auto node = std::make_shared<sprite_node>(desc.texture, desc.texture_coords);
     node->set_size(desc.size);
     _sprite_nodes.push_back(node);
     return node;
@@ -67,12 +66,12 @@ sprite_node_ptr scene::add_sprite(sprite_ptr sprite) {
 scene::sprite_description scene::_create_sprite_description(sprite_ptr sprite) {
     sprite_description desc;
     image img(sprite->image_file());
-    bool added = false;
-    tie(added, desc.texture, desc.texture_coords) = _try_fit_image(img);
-    if (!added) {
+    auto texture_part = _try_fit_image(img);
+    if (!texture_part) {
         auto texture = std::make_shared<texture_atlas>();
-        tie(added, desc.texture_coords) = texture->add(img);
-        if (added) {
+        auto coords  = texture->add(img);
+        if (coords) {
+            desc.texture_coords = *coords;
             desc.texture = texture;
             _textures.push_back(texture);
         }
@@ -80,22 +79,24 @@ scene::sprite_description scene::_create_sprite_description(sprite_ptr sprite) {
             throw std::runtime_error("Couldn't fit image into texture");
         }
     }
+    else {
+        tie(desc.texture, desc.texture_coords) = *texture_part;
+    }
     desc.size = img.size();
     return desc;
 }
 
-std::tuple<bool, texture_atlas_ptr, rectangle_f> scene::_try_fit_image(
-    const image& image)
+boost::optional<std::tuple<texture_atlas_ptr, rectangle_f>>
+scene::_try_fit_image(const image& image)
 {
-    texture_atlas_ptr texture;
-    rectangle_f coords;
-    auto it = boost::find_if(_textures, [&](texture_atlas_ptr t)->bool {
-        texture = t;
-        bool added = false;
-        tie(added, coords) = texture->add(image);
-        return added;
+    boost::optional<std::tuple<texture_atlas_ptr, rectangle_f>> result;
+    auto it = boost::find_if(_textures, [&](texture_atlas_ptr texture)->bool {
+        if (auto coords = texture->add(image)) {
+            result = std::make_tuple(texture, *coords);
+        }
+        return result;
     });
-    return std::make_tuple(it != _textures.end(), texture, coords);
+    return result;
 }
 
 bool scene::remove_sprite(sprite_node_ptr sprite_node) {
