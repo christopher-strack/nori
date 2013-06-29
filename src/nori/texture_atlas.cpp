@@ -24,7 +24,7 @@ boost::optional<rectangle_f> texture_atlas::add(const image& image) {
             GL_TEXTURE_2D, 0,
             region.left, region.top, region.size().x, region.size().y,
             GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&image.data()[0]);
-        const size_f& size = texture::size();
+        const size_f& size = size_f(texture::size());
         return rectangle_f(
             region.left / size.x, region.top / size.y,
             region.right / size.x, region.bottom / size.y);

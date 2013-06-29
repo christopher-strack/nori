@@ -19,10 +19,12 @@ namespace nori {
 class renderer;
 class image;
 
+typedef std::vector<std::tuple<texture_atlas_ptr, rectangle_f>> texture_slices;
+
 
 class sprite_node {
 public:
-    sprite_node(texture_ptr texture, const rectangle_f& texture_coords);
+    sprite_node(const texture_slices& slices);
 
     void set_size(const size_f& size);
     const size_f& size() const;
@@ -30,13 +32,15 @@ public:
     void set_position(const point_f& position);
     const point_f& position() const;
 
+    int slice_count() const;
+
     void render(renderer& renderer);
 
 private:
     size_f _size;
     point_f _position;
-    texture_ptr _texture;
-    rectangle_f _texture_coords;
+    int _slice_index;
+    texture_slices _texture_slices;
 };
 
 
@@ -50,19 +54,19 @@ public:
     void render(renderer& renderer);
 
 private:
-    struct sprite_description {
-        texture_atlas_ptr texture;
-        rectangle_f texture_coords;
-        size_f size;
-    };
-
-    typedef std::map<sprite_ptr, sprite_description> sprite_map;
+    typedef std::map<sprite_ptr, texture_slices> sprite_map;
     typedef std::vector<sprite_node_ptr> sprite_node_array;
     typedef std::vector<texture_atlas_ptr> texture_atlas_array;
 
-    sprite_description _create_sprite_description(sprite_ptr sprite);
-    boost::optional<std::tuple<texture_atlas_ptr, rectangle_f>>
-    _try_fit_image(const image& image);
+    texture_slices _slice_sprite(sprite_ptr sprite);
+    texture_slices _try_fit_sprite(const sprite_ptr& sprite);
+    texture_slices _slice_texture_part(
+        texture_atlas_ptr texture,
+        const rectangle_f& coords,
+        const size_f& grid_size,
+        const size_f& cell_size);
+    std::tuple<size_f, size_f>
+    _slice_image(const image& img, const size_f& requested_size);
 
     sprite_map _sprites;
     sprite_node_array _sprite_nodes;

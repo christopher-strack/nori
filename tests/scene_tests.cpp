@@ -81,3 +81,13 @@ TEST(scene, set_node_position) {
     EXPECT_CALL(renderer, render(_, _, Eq(ByRef(expected_pos)), _)).Times(1);
     scene.render(renderer);
 }
+
+TEST(scene, add_sliced_sprite_returns_sliced_node) {
+    nori::scene scene;
+
+    auto sliced_sprite = nori::make_sprite("assets/sprite.png", nori::size(1, 1));
+    auto node = scene.add_sprite(sliced_sprite);
+    ASSERT_EQ(node->position(), nori::point_f(0, 0));
+    ASSERT_EQ(node->size(), nori::size_f(1, 1));
+    ASSERT_EQ(node->slice_count(), 4);
+}
