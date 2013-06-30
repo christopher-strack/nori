@@ -18,14 +18,19 @@ void win_application::run(const nori::application_arguments& arguments) {
     if (on_initialized()) {
         _window->set_visible(true);
 
+        float elapsed_time = 0.0f;
         while (!_window->closed()) {
+            int start_time = GetTickCount();
             _window->dispatch_messages();
+            update(elapsed_time);
 
             if (_window->focused()) {
                 surface->clear();
                 render(renderer);
                 surface->swap();
             }
+
+            elapsed_time = float(GetTickCount() - start_time) / 1000.0f;
         }
     }
 }
