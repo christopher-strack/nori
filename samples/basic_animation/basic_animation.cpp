@@ -3,10 +3,13 @@
 #include <nori/window.h>
 #include <nori/log.h>
 #include <nori/scene.h>
+#include <nori/animation.h>
 #include <nori/sprite.h>
 
 #include <memory>
 #include <stdexcept>
+
+#include <boost/range/counting_range.hpp>
 
 
 class basic_animation_app : public nori::application {
@@ -17,12 +20,20 @@ public:
             nori::size(35, 43));
         auto node = _scene.add_sprite(megaman);
         node->set_position(nori::point(100, 500));
+        node->set_size(nori::size(35 * 3, 43 * 3));
+        node->set_animation(
+            nori::animation(boost::counting_range(0, 7))
+                .set_speed(0.2f));
         return true;
     }
 
     virtual void on_window_created(nori::window& window) {
         window.set_size(nori::size(1024, 768));
         window.set_title("basic animation");
+    }
+
+    virtual void update(float elapsed_seconds) {
+        _scene.update(elapsed_seconds);
     }
 
     virtual void render(nori::renderer& renderer) {

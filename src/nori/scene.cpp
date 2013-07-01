@@ -5,20 +5,31 @@
 #include "nori/renderer.h"
 #include "nori/texture_atlas.h"
 
+#include <array>
 #include <memory>
 #include <math.h>
 
 #include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/range/algorithm/find_if.hpp>
 #include <boost/range/algorithm/find.hpp>
+#include <boost/range/algorithm/for_each.hpp>
+#include <boost/algorithm/clamp.hpp>
 
 using std::tie;
+
+namespace {
+
+std::array<int, 1> default_range = {0};
+
+}
 
 
 namespace nori {
 
 sprite_node::sprite_node(const texture_slices& slices)
-    : _texture_slices(slices), _slice_index(0)
+    : _texture_slices(slices),
+      _slice_index(0),
+      _animation(default_range)
 {
     assert(!slices.empty());
 
@@ -48,11 +59,23 @@ int sprite_node::slice_count() const {
     return _texture_slices.size();
 }
 
+void sprite_node::set_animation(const animation& animation) {
+    _animation = animation;
+}
+
 void sprite_node::render(renderer& renderer) {
+    assert(_slice_index >= 0);
+    assert(_slice_index < slice_count());
+
     texture_atlas_ptr texture;
     rectangle_f coords;
     tie(texture, coords) = _texture_slices[_slice_index];
     renderer.render(*texture, coords, _position, _size);
+}
+
+void sprite_node::update(float elapsed_seconds) {
+    _animation.advance(elapsed_seconds);
+    _slice_index = boost::algorithm::clamp(_animation.value(), 0, slice_count()-1);
 }
 
 
@@ -152,10 +175,15 @@ bool scene::remove_sprite(sprite_node_ptr sprite_node) {
 }
 
 void scene::render(renderer& renderer) {
-    for (auto it = _sprite_nodes.begin(); it != _sprite_nodes.end(); it++) {
-        auto node = *it;
+    boost::for_each(_sprite_nodes, [&](sprite_node_ptr node) {
         node->render(renderer);
-    }
+    });
+}
+
+void scene::update(float elapsed_seconds) {
+    boost::for_each(_sprite_nodes, [&](sprite_node_ptr node) {
+        node->update(elapsed_seconds);
+    });
 }
 
 } // namespace nori

@@ -1,6 +1,7 @@
 #ifndef NORI_SCENE_H_
 #define NORI_SCENE_H_
 
+#include "nori/animation.h"
 #include "nori/rectangle.h"
 #include "nori/detail/scene_fwd.h"
 #include "nori/detail/sprite_fwd.h"
@@ -10,8 +11,6 @@
 #include <vector>
 #include <map>
 #include <tuple>
-
-#include <boost/optional.hpp>
 
 
 namespace nori {
@@ -34,13 +33,17 @@ public:
 
     int slice_count() const;
 
+    void set_animation(const animation& animation);
+
     void render(renderer& renderer);
+    void update(float elapsed_seconds);
 
 private:
     size_f _size;
     point_f _position;
-    int _slice_index;
     texture_slices _texture_slices;
+    int _slice_index;
+    animation _animation;
 };
 
 
@@ -52,6 +55,7 @@ public:
     bool remove_sprite(sprite_node_ptr sprite_node);
 
     void render(renderer& renderer);
+    void update(float elapsed_seconds);
 
 private:
     typedef std::map<sprite_ptr, texture_slices> sprite_map;
