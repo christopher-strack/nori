@@ -26,10 +26,12 @@ public:
     }
 
     template<typename U>
-    operator rectangle_t<U>() {
-        return rectangle_t<U>(
-            static_cast<U>(left), static_cast<U>(top),
-            static_cast<U>(right), static_cast<U>(bottom));
+    rectangle_t(const rectangle_t<U>& other)
+        : left(static_cast<T>(other.left)),
+          top(static_cast<T>(other.top)),
+          right(static_cast<T>(other.right)),
+          bottom(static_cast<T>(other.bottom))
+    {
     }
 
     bool operator==(const rectangle_t<T>& other) const {

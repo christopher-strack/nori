@@ -3,7 +3,6 @@
 #include <nori/window.h>
 #include <nori/log.h>
 #include <nori/scene.h>
-#include <nori/sprite.h>
 
 #include <memory>
 #include <stdexcept>
@@ -12,7 +11,7 @@
 class basic_drawing_app : public nori::application {
 public:
     virtual bool on_initialized() {
-        _scene.add_sprite(nori::make_sprite("assets/megaman.png"));
+        _scene.add_sprite("assets/megaman.png");
         return true;
     }
 

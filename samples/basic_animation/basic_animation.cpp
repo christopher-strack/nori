@@ -4,7 +4,7 @@
 #include <nori/log.h>
 #include <nori/scene.h>
 #include <nori/animation.h>
-#include <nori/sprite.h>
+#include <nori/slicer.h>
 
 #include <memory>
 #include <stdexcept>
@@ -15,10 +15,9 @@
 class basic_animation_app : public nori::application {
 public:
     virtual bool on_initialized() {
-        auto megaman = nori::make_sprite(
+        auto node = _scene.add_sprite(
             "assets/megaman_idle_walk.png",
-            nori::size(35, 43));
-        auto node = _scene.add_sprite(megaman);
+            nori::grid_slicer(35, 43));
         node->set_position(nori::point(100, 500));
         node->set_size(nori::size(35 * 3, 43 * 3));
         node->set_animation(

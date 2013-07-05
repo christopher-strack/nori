@@ -4,7 +4,7 @@
 #include <gmock/gmock.h>
 
 #include <nori/scene.h>
-#include <nori/sprite.h>
+#include <nori/slicer.h>
 #include <nori/texture.h>
 
 using ::testing::_;
@@ -19,7 +19,7 @@ TEST(scene, construct) {
 TEST(scene, add_sprite_returns_valid_node) {
     nori::scene scene;
 
-    auto node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto node = scene.add_sprite("assets/sprite.png");
     ASSERT_EQ(node->position(), nori::point_f(0, 0));
     ASSERT_EQ(node->size(), nori::size_f(2, 2));
 }
@@ -27,8 +27,8 @@ TEST(scene, add_sprite_returns_valid_node) {
 TEST(scene, add_equal_sprites_returns_equal_nodes) {
     nori::scene scene;
 
-    auto node1 = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
-    auto node2 = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto node1 = scene.add_sprite("assets/sprite.png");
+    auto node2 = scene.add_sprite("assets/sprite.png");
     ASSERT_EQ(node1->position(), node2->position());
     ASSERT_EQ(node1->size(), node2->size());
 }
@@ -36,7 +36,7 @@ TEST(scene, add_equal_sprites_returns_equal_nodes) {
 TEST(scene, render) {
     nori::testing::renderer_mock renderer;
     nori::scene scene;
-    scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    scene.add_sprite("assets/sprite.png");
 
     EXPECT_CALL(renderer, render(_, _, _, _)).Times(1);
     scene.render(renderer);
@@ -44,7 +44,7 @@ TEST(scene, render) {
 
 TEST(scene, remove_sprite) {
     nori::scene scene;
-    auto sprite_node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto sprite_node = scene.add_sprite("assets/sprite.png");
 
     bool result = scene.remove_sprite(sprite_node);
     ASSERT_TRUE(result);
@@ -60,7 +60,7 @@ TEST(scene, remove_sprite) {
 TEST(scene, set_node_size) {
     nori::testing::renderer_mock renderer;
     nori::scene scene;
-    auto sprite_node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto sprite_node = scene.add_sprite("assets/sprite.png");
 
     sprite_node->set_size(nori::size_f(100, 200));
     ASSERT_EQ(sprite_node->size(), nori::size_f(100, 200));
@@ -72,7 +72,7 @@ TEST(scene, set_node_size) {
 TEST(scene, set_node_position) {
     nori::testing::renderer_mock renderer;
     nori::scene scene;
-    auto sprite_node = scene.add_sprite(nori::make_sprite("assets/sprite.png"));
+    auto sprite_node = scene.add_sprite("assets/sprite.png");
     ASSERT_EQ(sprite_node->position(), nori::point_f());
 
     sprite_node->set_position(nori::point_f(100, 200));
@@ -85,8 +85,7 @@ TEST(scene, set_node_position) {
 TEST(scene, add_sliced_sprite_returns_sliced_node) {
     nori::scene scene;
 
-    auto sliced_sprite = nori::make_sprite("assets/sprite.png", nori::size(1, 1));
-    auto node = scene.add_sprite(sliced_sprite);
+    auto node = scene.add_sprite("assets/sprite.png", nori::grid_slicer(1, 1));
     ASSERT_EQ(node->position(), nori::point_f(0, 0));
     ASSERT_EQ(node->size(), nori::size_f(1, 1));
     ASSERT_EQ(node->slice_count(), 4);
