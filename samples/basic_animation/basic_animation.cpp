@@ -15,14 +15,14 @@
 class basic_animation_app : public nori::application {
 public:
     virtual bool on_initialized() {
-        auto node = _scene.add_sprite(
+        auto sprite = _scene.add_sprite(
             "assets/megaman_idle_walk.png",
             nori::grid_slicer(35, 43));
-        node->set_position(nori::point(100, 500));
-        node->set_size(nori::size(35 * 3, 43 * 3));
-        node->set_animation(
-            nori::animation(boost::counting_range(0, 7))
-                .set_speed(0.2f));
+        sprite->set_position(nori::point(100, 500));
+        sprite->set_size(nori::size(35 * 3, 43 * 3));
+        sprite->set_animation(
+            nori::animation(boost::counting_range(13, 20))
+            .set_speed(0.2f));
         return true;
     }
 
