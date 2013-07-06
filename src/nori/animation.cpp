@@ -4,6 +4,11 @@
 
 namespace nori {
 
+animation::animation()
+    : _value(0), _elapsed_time(0), _speed(1)
+{
+}
+
 animation::animation(const integer_range& range)
     : _range(range),
       _iterator(range.begin()),
@@ -11,19 +16,22 @@ animation::animation(const integer_range& range)
       _elapsed_time(0),
       _speed(1)
 {
-    assert(!range.empty());
-    _value = *range.begin();
+    if (!range.empty()) {
+        _value = *range.begin();
+    }
 }
 
 void animation::advance(float time) {
-    _elapsed_time += time;
-    while (_elapsed_time >= _speed) {
-        _iterator++;
-        if (_iterator == _range.end()) {
-            _iterator = _range.begin();
+    if (!_range.empty()) {
+        _elapsed_time += time;
+        while (!_range.empty() && _elapsed_time >= _speed) {
+            _iterator++;
+            if (_iterator == _range.end()) {
+                _iterator = _range.begin();
+            }
+            _value = *_iterator;
+            _elapsed_time -= _speed;
         }
-        _value = *_iterator;
-        _elapsed_time -= _speed;
     }
 }
 

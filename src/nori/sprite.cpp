@@ -3,24 +3,14 @@
 #include "nori/renderer.h"
 #include "nori/texture_atlas.h"
 
-#include <array>
-
 #include <boost/algorithm/clamp.hpp>
-
-
-namespace {
-
-std::array<int, 1> default_range = {0};
-
-}
 
 
 namespace nori {
 
 sprite::sprite(const texture_parts& slices)
     : _texture_slices(slices),
-      _slice_index(0),
-      _animation(default_range)
+      _slice_index(0)
 {
     assert(!slices.empty());
 

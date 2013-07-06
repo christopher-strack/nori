@@ -14,6 +14,7 @@ integer_range;
 
 class animation {
 public:
+    animation();
     animation(const integer_range& range);
 
     void advance(float time);

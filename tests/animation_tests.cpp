@@ -19,6 +19,13 @@ TEST(animation, construct) {
     ASSERT_EQ(a.value(), 1);
 }
 
+TEST(animation, construct_empty) {
+    nori::animation a;
+    ASSERT_EQ(a.value(), 0);
+    a.advance(1.0f);
+    ASSERT_EQ(a.value(), 0);
+}
+
 TEST(animation, advance_to_next_value) {
     nori::animation a(default_pattern);
 
