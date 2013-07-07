@@ -1,6 +1,7 @@
 #ifndef NORI_RENDERER_MOCK_H_
 #define NORI_RENDERER_MOCK_H_
 
+#include <nori/texture.h>
 #include <nori/renderer.h>
 #include <nori/graphics_surface.h>
 

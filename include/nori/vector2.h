@@ -1,6 +1,8 @@
 #ifndef NORI_VECTOR2_H_
 #define NORI_VECTOR2_H_
 
+#include <stdexcept>
+
 
 namespace nori {
 
@@ -13,21 +15,23 @@ public:
     vector2(const vector2<T>& other);
     vector2<T>& operator=(const vector2<T>& other);
 
+    template<typename U>
+    vector2(const vector2<U>& other)
+        : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))
+    {
+    }
+
     bool operator==(const vector2<T>& other) const;
     bool operator!=(const vector2<T>& other) const;
 
-    template<typename U>
-    operator vector2<U>() {
-        return vector2<U>(static_cast<U>(x), static_cast<U>(y));
-    }
+    T& operator[](int index);
+    T operator[](int index) const;
 
-    vector2<T> operator*(T scalar) {
-        return vector2<T>(x * scalar, y * scalar);
-    }
+    vector2<T> operator+(const vector2<T>& other) const;
+    vector2<T> operator-(const vector2<T>& other) const;
 
-    vector2<T> operator/(T scalar) {
-        return vector2<T>(x / scalar, y / scalar);
-    }
+    vector2<T> operator*(T scalar) const;
+    vector2<T> operator/(T scalar) const;
 
     T x;
     T y;
@@ -67,6 +71,42 @@ bool nori::vector2<T>::operator==(const vector2<T>& other) const {
 template<typename T>
 bool nori::vector2<T>::operator!=(const vector2<T>& other) const {
     return !operator==(other);
+}
+
+template<typename T>
+T& nori::vector2<T>::operator[](int index) {
+    if (index < 0 || index > 1) {
+        throw std::out_of_range("Invalid element access.");
+    }
+    return index == 0 ? x : y;
+}
+
+template<typename T>
+T nori::vector2<T>::operator[](int index) const {
+    if (index < 0 || index > 1) {
+        throw std::out_of_range("Invalid element access.");
+    }
+    return index == 0 ? x : y;
+}
+
+template<typename T>
+vector2<T> nori::vector2<T>::operator+(const vector2<T>& other) const {
+    return vector2<T>(x + other.x, y + other.y);
+}
+
+template<typename T>
+vector2<T> nori::vector2<T>::operator-(const vector2<T>& other) const {
+    return vector2<T>(x - other.x, y - other.y);
+}
+
+template<typename T>
+vector2<T> nori::vector2<T>::operator*(T scalar) const {
+    return vector2<T>(x * scalar, y * scalar);
+}
+
+template<typename T>
+vector2<T> nori::vector2<T>::operator/(T scalar) const {
+    return vector2<T>(x / scalar, y / scalar);
 }
 
 } // namespace nori

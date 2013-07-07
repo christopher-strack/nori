@@ -52,3 +52,36 @@ TEST(vector2, divide) {
     nori::vector2<float> v(10, 20);
     ASSERT_EQ(v / 2.0f, nori::vector2<float>(5, 10));
 }
+
+TEST(vector2, index_operator_access_elements) {
+    nori::vector2<float> v(10, 20);
+    ASSERT_EQ(v[0], 10);
+    ASSERT_EQ(v[1], 20);
+}
+
+TEST(vector2, write_element_by_index) {
+    nori::vector2<float> v;
+    v[0] = 10;
+    v[1] = 20;
+
+    ASSERT_EQ(v[0], 10);
+    ASSERT_EQ(v[1], 20);
+}
+
+TEST(vector2, index_operator_throws_when_out_of_range) {
+    nori::vector2<float> v(10, 20);
+    ASSERT_THROW(v[2], std::out_of_range);
+    ASSERT_THROW(v[-1], std::out_of_range);
+}
+
+TEST(vector2, add_vectors) {
+    nori::vector2<int> v1(10, 20);
+    nori::vector2<int> v2(20, 30);
+    ASSERT_EQ(v1 + v2, nori::vector2<int>(30, 50));
+}
+
+TEST(vector2, sub_vectors) {
+    nori::vector2<int> v1(10, 20);
+    nori::vector2<int> v2(20, 30);
+    ASSERT_EQ(v1 - v2, nori::vector2<int>(-10, -10));
+}

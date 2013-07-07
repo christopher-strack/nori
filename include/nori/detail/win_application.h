@@ -19,6 +19,7 @@ protected:
     virtual bool on_initialized() { return true; }
     virtual void on_window_created(window& window) {}
 
+    virtual void update(float elapsed_seconds) {}
     virtual void render(renderer& renderer) {}
 
 private:

@@ -1,0 +1,11 @@
+# Android project files
+bin
+libs
+gen
+
+/local.properties
+/build.xml
+/proguard-project.txt
+/project.properties
+
+/build

@@ -8,7 +8,19 @@
 #include <android/native_activity.h>
 #include <android/looper.h>
 
+#include <ctime>
 #include <memory>
+
+
+namespace {
+
+double now() {
+    timespec res;
+    clock_gettime(CLOCK_REALTIME, &res);
+    return 1000.0 * res.tv_sec + (double) res.tv_nsec / 1e6;
+}
+
+}
 
 
 namespace nori {
@@ -26,23 +38,28 @@ void android_application::run(const nori::application_arguments& arguments) {
     _android_app->onAppCmd = &_on_android_command_proxy;
     _android_app->onInputEvent = &_on_android_input_proxy;
 
+    double elapsed_time = 0.0f;
     while (_android_app->destroyRequested == 0) {
         _process_android_events(_android_app);
 
         if (_graphics_surface && _focused) {
+            double start_time = now();
+            update(float(elapsed_time));
+
             _graphics_surface->clear();
             render(*_renderer);
             _graphics_surface->swap();
+
+            elapsed_time = (now() - start_time) / 1000.0;
         }
     }
 }
 
 void android_application::_process_android_events(android_app* app) {
-    int ident;
     int events;
     android_poll_source* source;
 
-    while ((ident = ALooper_pollAll(0, 0, &events, (void**)&source)) >= 0) {
+    while (ALooper_pollAll(0, 0, &events, (void**)&source) >= 0) {
         if (source != 0) {
             source->process(app, source);
         }
