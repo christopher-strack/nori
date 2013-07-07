@@ -60,7 +60,7 @@ void sprite::render(renderer& renderer) {
     texture_atlas_ptr texture;
     rectangle_f coords;
     tie(texture, coords) = _texture_slices[_slice_index];
-    renderer.render(*texture, coords, _position, _scaled_size);
+    renderer.render(*texture, coords, _position - _scaled_size / 2.0f, _scaled_size);
 }
 
 void sprite::update(float elapsed_seconds) {

@@ -53,7 +53,7 @@ TEST_F(simple_sprite_test, render) {
     sprite->set_position(nori::point_f(300, 400));
 
     nori::size_f expected_size(16, 16);
-    nori::point_f expected_pos(300, 400);
+    nori::point_f expected_pos(292, 392);
     EXPECT_CALL(renderer, render(
             _, _,
             Eq(ByRef(expected_pos)),
