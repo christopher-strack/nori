@@ -33,4 +33,19 @@ rectangle_list grid_slicer::slice(const size& area_size) {
     return slices;
 }
 
+
+custom_slicer& custom_slicer::add_slice(const rectangle& rect) {
+    _rectangle_list.push_back(rect);
+    return *this;
+}
+
+custom_slicer& custom_slicer::add_slices(const rectangle_list& rectangles) {
+    _rectangle_list.insert(_rectangle_list.end(), rectangles.begin(), rectangles.end());
+    return *this;
+}
+
+rectangle_list custom_slicer::slice(const size& area_size) {
+    return _rectangle_list;
+}
+
 } // namespace nori

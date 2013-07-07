@@ -35,6 +35,18 @@ private:
     size _cell_size;
 };
 
+
+class custom_slicer : public slicer_base {
+public:
+    custom_slicer& add_slice(const rectangle& rect);
+    custom_slicer& add_slices(const rectangle_list& rectangles);
+
+    virtual rectangle_list slice(const size& area_size);
+
+private:
+    rectangle_list _rectangle_list;
+};
+
 } // namespace nori
 
 #endif // NORI_SPRITE_H_
