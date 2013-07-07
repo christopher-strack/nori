@@ -31,6 +31,8 @@ public:
     void update(float elapsed_seconds);
 
 private:
+    void _set_slice_index(int index);
+
     size_f _size;
     point_f _position;
     texture_parts _texture_slices;

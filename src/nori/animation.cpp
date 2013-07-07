@@ -24,7 +24,7 @@ animation::animation(const integer_range& range)
 void animation::advance(float time) {
     if (!_range.empty()) {
         _elapsed_time += time;
-        while (!_range.empty() && _elapsed_time >= _speed) {
+        while (_elapsed_time >= _speed) {
             _iterator++;
             if (_iterator == _range.end()) {
                 _iterator = _range.begin();

@@ -10,14 +10,10 @@ namespace nori {
 
 sprite::sprite(const texture_parts& slices)
     : _texture_slices(slices),
-      _slice_index(0)
+      _slice_index(-1)
 {
     assert(!slices.empty());
-
-    auto slice = _texture_slices[0];
-    nori::size texture_size = std::get<0>(slice)->size();
-    size_f slice_size = std::get<1>(slice).size();
-    _size = size_f(slice_size.x * texture_size.x, slice_size.y * texture_size.y);
+    _set_slice_index(_animation.value());
 }
 
 void sprite::set_size(const size_f& size) {
@@ -42,6 +38,7 @@ int sprite::slice_count() const {
 
 void sprite::set_animation(const animation& animation) {
     _animation = animation;
+    _set_slice_index(_animation.value());
 }
 
 void sprite::render(renderer& renderer) {
@@ -56,7 +53,17 @@ void sprite::render(renderer& renderer) {
 
 void sprite::update(float elapsed_seconds) {
     _animation.advance(elapsed_seconds);
-    _slice_index = boost::algorithm::clamp(_animation.value(), 0, slice_count()-1);
+    _set_slice_index(_animation.value());
+}
+
+void sprite::_set_slice_index(int index) {
+    if (index != _slice_index) {
+        _slice_index = boost::algorithm::clamp(_animation.value(), 0, slice_count()-1);
+        auto slice = _texture_slices[_slice_index];
+        nori::size texture_size = std::get<0>(slice)->size();
+        size_f slice_size = std::get<1>(slice).size();
+        _size = size_f(slice_size.x * texture_size.x, slice_size.y * texture_size.y);
+    }
 }
 
 } // namespace nori
