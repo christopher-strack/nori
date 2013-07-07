@@ -25,7 +25,7 @@ public:
 
     int slice_count() const;
 
-    void set_animation(const animation& animation);
+    void set_animation(animation& animation);
 
     void render(renderer& renderer);
     void update(float elapsed_seconds);
@@ -37,7 +37,7 @@ private:
     point_f _position;
     texture_parts _texture_slices;
     int _slice_index;
-    animation _animation;
+    animation* _animation;
 };
 
 } // namespace nori

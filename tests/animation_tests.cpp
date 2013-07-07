@@ -77,3 +77,19 @@ TEST(animation, set_speed) {
     a.advance(0.1f);
     ASSERT_EQ(a.value(), 3);
 }
+
+TEST(animation, set_sequence) {
+    nori::animation a;
+    a.set_sequence(default_pattern);
+    ASSERT_EQ(a.sequence(), default_pattern);
+}
+
+TEST(animation, set_sequence_resets_state) {
+    nori::animation a(boost::counting_range(0, 3));
+
+    a.set_sequence(default_pattern);
+    ASSERT_EQ(a.value(), 1);
+
+    a.advance(1.0f);
+    ASSERT_EQ(a.value(), 2);
+}

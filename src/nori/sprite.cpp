@@ -5,15 +5,22 @@
 
 #include <boost/algorithm/clamp.hpp>
 
+namespace {
+
+nori::animation empty_animation;
+
+} // anonymous namespace
+
 
 namespace nori {
 
 sprite::sprite(const texture_parts& slices)
     : _texture_slices(slices),
-      _slice_index(-1)
+      _slice_index(-1),
+      _animation(&empty_animation)
 {
     assert(!slices.empty());
-    _set_slice_index(_animation.value());
+    _set_slice_index(_animation->value());
 }
 
 void sprite::set_size(const size_f& size) {
@@ -36,9 +43,9 @@ int sprite::slice_count() const {
     return _texture_slices.size();
 }
 
-void sprite::set_animation(const animation& animation) {
-    _animation = animation;
-    _set_slice_index(_animation.value());
+void sprite::set_animation(animation& animation) {
+    _animation = &animation;
+    _set_slice_index(_animation->value());
 }
 
 void sprite::render(renderer& renderer) {
@@ -52,13 +59,13 @@ void sprite::render(renderer& renderer) {
 }
 
 void sprite::update(float elapsed_seconds) {
-    _animation.advance(elapsed_seconds);
-    _set_slice_index(_animation.value());
+    _animation->advance(elapsed_seconds);
+    _set_slice_index(_animation->value());
 }
 
 void sprite::_set_slice_index(int index) {
     if (index != _slice_index) {
-        _slice_index = boost::algorithm::clamp(_animation.value(), 0, slice_count()-1);
+        _slice_index = boost::algorithm::clamp(_animation->value(), 0, slice_count()-1);
         auto slice = _texture_slices[_slice_index];
         nori::size texture_size = std::get<0>(slice)->size();
         size_f slice_size = std::get<1>(slice).size();

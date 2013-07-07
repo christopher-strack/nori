@@ -23,6 +23,9 @@ public:
     animation& set_speed(float speed);
     float speed() const;
 
+    animation& set_sequence(const integer_range& range);
+    const integer_range& sequence() const;
+
 private:
     int _value;
     float _elapsed_time;

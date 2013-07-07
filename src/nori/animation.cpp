@@ -48,4 +48,15 @@ float animation::speed() const {
     return _speed;
 }
 
+animation& animation::set_sequence(const integer_range& range) {
+    _range = range;
+    _iterator = range.begin();
+    _value = range.empty() ? 0 : *range.begin();
+    return *this;
+}
+
+const integer_range& animation::sequence() const {
+    return _range;
+}
+
 } // namespace nori

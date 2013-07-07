@@ -62,8 +62,17 @@ TEST_F(simple_sprite_test, render) {
     sprite->render(renderer);
 }
 
+TEST_F(simple_sprite_test, updating_advances_animation) {
+    nori::animation animation(boost::counting_range(1, 3));
+    sprite->set_animation(animation);
+
+    sprite->update(1.0f);
+    ASSERT_EQ(animation.value(), 2);
+}
+
 TEST_F(simple_sprite_test, animate_out_of_range_is_ignored) {
-    sprite->set_animation(nori::animation(boost::counting_range(1, 3)));
+    nori::animation animation(boost::counting_range(1, 3));
+    sprite->set_animation(animation);
     sprite->update(1.0f);
 }
 
@@ -86,8 +95,9 @@ public:
 };
 
 
-TEST_F(sliced_sprite_test, animation) {
-    sprite->set_animation(nori::animation(boost::counting_range(0, 2)));
+TEST_F(sliced_sprite_test, animation_updates_sprite_size) {
+    nori::animation animation(boost::counting_range(0, 2));
+    sprite->set_animation(animation);
     ASSERT_EQ(sprite->size(), nori::size(16, 16));
 
     sprite->update(1.0f);
@@ -97,6 +107,7 @@ TEST_F(sliced_sprite_test, animation) {
 TEST_F(sliced_sprite_test, set_animation_updates_immediatly) {
     using namespace boost::adaptors;
 
-    sprite->set_animation(nori::animation(boost::counting_range(0, 2) | reversed));
+    nori::animation animation(boost::counting_range(0, 2) | reversed);
+    sprite->set_animation(animation);
     ASSERT_EQ(sprite->size(), nori::size(8, 8));
 }
