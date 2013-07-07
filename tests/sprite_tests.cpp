@@ -36,9 +36,9 @@ TEST_F(simple_sprite_test, construct) {
     ASSERT_EQ(sprite->position(), nori::point(0, 0));
 }
 
-TEST_F(simple_sprite_test, size) {
-    sprite->set_size(nori::size_f(100, 200));
-    ASSERT_EQ(sprite->size(), nori::size_f(100, 200));
+TEST_F(simple_sprite_test, scale) {
+    sprite->set_scale(2.0f);
+    ASSERT_EQ(sprite->size(), nori::size_f(200, 400));
 }
 
 TEST_F(simple_sprite_test, position) {

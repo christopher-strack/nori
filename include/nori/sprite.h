@@ -17,23 +17,26 @@ class sprite {
 public:
     sprite(const texture_parts& slices);
 
-    void set_size(const size_f& size);
+    sprite& set_scale(float scale);
     const size_f& size() const;
 
-    void set_position(const point_f& position);
+    sprite& set_position(const point_f& position);
     const point_f& position() const;
 
     int slice_count() const;
 
-    void set_animation(animation& animation);
+    sprite& set_animation(animation& animation);
 
     void render(renderer& renderer);
     void update(float elapsed_seconds);
 
 private:
     void _set_slice_index(int index);
+    void _update_scaled_size();
 
     size_f _size;
+    size_f _scaled_size;
+    float _scale;
     point_f _position;
     texture_parts _texture_slices;
     int _slice_index;
