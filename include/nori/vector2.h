@@ -30,8 +30,8 @@ public:
     vector2<T> operator+(const vector2<T>& other) const;
     vector2<T> operator-(const vector2<T>& other) const;
 
-    vector2<T> operator*(T scalar);
-    vector2<T> operator/(T scalar);
+    vector2<T> operator*(T scalar) const;
+    vector2<T> operator/(T scalar) const;
 
     T x;
     T y;
@@ -100,12 +100,12 @@ vector2<T> nori::vector2<T>::operator-(const vector2<T>& other) const {
 }
 
 template<typename T>
-vector2<T> nori::vector2<T>::operator*(T scalar) {
+vector2<T> nori::vector2<T>::operator*(T scalar) const {
     return vector2<T>(x * scalar, y * scalar);
 }
 
 template<typename T>
-vector2<T> nori::vector2<T>::operator/(T scalar) {
+vector2<T> nori::vector2<T>::operator/(T scalar) const {
     return vector2<T>(x / scalar, y / scalar);
 }
 

@@ -17,22 +17,26 @@ namespace nori {
 sprite::sprite(const texture_parts& slices)
     : _texture_slices(slices),
       _slice_index(-1),
-      _animation(&empty_animation)
+      _animation(&empty_animation),
+      _scale(1.0f)
 {
     assert(!slices.empty());
     _set_slice_index(_animation->value());
 }
 
-void sprite::set_size(const size_f& size) {
-    _size = size;
+sprite& sprite::set_scale(float scale) {
+    _scale = scale;
+    _update_scaled_size();
+    return *this;
 }
 
 const size_f& sprite::size() const {
-    return _size;
+    return _scaled_size;
 }
 
-void sprite::set_position(const point_f& position) {
+sprite& sprite::set_position(const point_f& position) {
     _position = position;
+    return *this;
 }
 
 const point_f& sprite::position() const {
@@ -43,9 +47,10 @@ int sprite::slice_count() const {
     return _texture_slices.size();
 }
 
-void sprite::set_animation(animation& animation) {
+sprite& sprite::set_animation(animation& animation) {
     _animation = &animation;
     _set_slice_index(_animation->value());
+    return *this;
 }
 
 void sprite::render(renderer& renderer) {
@@ -55,7 +60,7 @@ void sprite::render(renderer& renderer) {
     texture_atlas_ptr texture;
     rectangle_f coords;
     tie(texture, coords) = _texture_slices[_slice_index];
-    renderer.render(*texture, coords, _position, _size);
+    renderer.render(*texture, coords, _position, _scaled_size);
 }
 
 void sprite::update(float elapsed_seconds) {
@@ -70,7 +75,12 @@ void sprite::_set_slice_index(int index) {
         nori::size texture_size = std::get<0>(slice)->size();
         size_f slice_size = std::get<1>(slice).size();
         _size = size_f(slice_size.x * texture_size.x, slice_size.y * texture_size.y);
+        _update_scaled_size();
     }
+}
+
+void sprite::_update_scaled_size() {
+    _scaled_size = _size * _scale;
 }
 
 } // namespace nori

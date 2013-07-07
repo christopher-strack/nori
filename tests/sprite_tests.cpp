@@ -36,9 +36,9 @@ TEST_F(simple_sprite_test, construct) {
     ASSERT_EQ(sprite->position(), nori::point(0, 0));
 }
 
-TEST_F(simple_sprite_test, size) {
-    sprite->set_size(nori::size_f(100, 200));
-    ASSERT_EQ(sprite->size(), nori::size_f(100, 200));
+TEST_F(simple_sprite_test, scale) {
+    sprite->set_scale(2.0f);
+    ASSERT_EQ(sprite->size(), nori::size_f(64, 64));
 }
 
 TEST_F(simple_sprite_test, position) {
@@ -49,10 +49,10 @@ TEST_F(simple_sprite_test, position) {
 TEST_F(simple_sprite_test, render) {
     nori::testing::renderer_mock renderer;
 
-    sprite->set_size(nori::size_f(100, 200));
+    sprite->set_scale(0.5f);
     sprite->set_position(nori::point_f(300, 400));
 
-    nori::size_f expected_size(100, 200);
+    nori::size_f expected_size(16, 16);
     nori::point_f expected_pos(300, 400);
     EXPECT_CALL(renderer, render(
             _, _,

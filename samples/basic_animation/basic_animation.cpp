@@ -41,7 +41,7 @@ public:
             .set_speed(0.1f);
 
         _sprite->set_position(nori::point(100, 500));
-        _sprite->set_size(nori::size(35 * 3, 43 * 3));
+        _sprite->set_scale(3.0f);
         _sprite->set_animation(_running_animation);
         return true;
     }
@@ -52,10 +52,10 @@ public:
     }
 
     virtual void update(float elapsed_seconds) {
-        static float x = 10.0f;
+        static float x = -20.0f;
         if (x < 500) {
             _sprite->set_position(nori::point_f(x, 500));
-            x += 80 * elapsed_seconds;
+            x += 220 * elapsed_seconds;
         }
         else
         {
